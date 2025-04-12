@@ -57,22 +57,23 @@
     </label>
     <button type="submit">Continue</button>
   </form>
-
+ 
   <script>
-    document.getElementById('methodForm').addEventListener('submit', function(event) {
-      const method = document.querySelector('input[name="registration_method"]:checked").value;
+  document.getElementById('methodForm').addEventListener('submit', function(event) {
+    const method = document.querySelector('input[name="registration_method"]:checked').value;
 
-      // Redirects for each selection
-      if (method === "Pay Online") {
-        window.top.location.href = "https://example.com/form-online-payment.html";
-      } else if (method === "Mail Check (Online Form)") {
-        window.top.location.href = "https://example.com/form-mail-check.html";
-      } else if (method === "Mail Everything") {
-        window.top.location.href = "https://example.com/form-download.html";
-      }
+    // Open selected option in a new tab
+    if (method === "Pay Online") {
+      window.open("https://example.com/form-online-payment.html", "_blank");
+    } else if (method === "Mail Check (Online Form)") {
+      window.open("https://example.com/form-mail-check.html", "_blank");
+    } else if (method === "Mail Everything") {
+      window.open("https://example.com/form-download.html", "_blank");
+    }
 
-      event.preventDefault(); // Stop form from actually submitting to Zapier
-    });
-  </script>
+    event.preventDefault(); // Prevent form from submitting normally
+  });
+</script>
+
 </body>
 </html>
