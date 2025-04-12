@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DHS 50-Year Reunion Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background-color: #fffbe6;
+    }
+    h2 {
+      text-align: center;
+      color: #000;
+    }
+    label {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      padding: 12px 20px;
+      background-color: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+      display: block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>DHS Class of 1975 Reunion Registration</h2>
+  <p><strong>How would you like to complete your registration?</strong></p>
+
+  <form id="methodForm" action="https://hooks.zapier.com/hooks/catch/your-webhook-url/" method="POST">
+    <label>
+      <input type="radio" name="registration_method" value="Pay Online" required>
+      Complete Online Registration Form and Pay Online
+    </label>
+    <label>
+      <input type="radio" name="registration_method" value="Mail Check (Online Form)">
+      Complete Online Registration Form and Pay with Check by Mail
+    </label>
+    <label>
+      <input type="radio" name="registration_method" value="Mail Everything">
+      Download Registration Form to Register and Pay by Mail
+    </label>
+    <button type="submit">Continue</button>
+  </form>
+
+  <script>
+    document.getElementById('methodForm').addEventListener('submit', function(event) {
+      const method = document.querySelector('input[name="registration_method"]:checked").value;
+
+      // Redirects for each selection
+      if (method === "Pay Online") {
+        window.location.href = "https://example.com/form-online-payment.html";
+      } else if (method === "Mail Check (Online Form)") {
+        window.location.href = "https://example.com/form-mail-check.html";
+      } else if (method === "Mail Everything") {
+        window.location.href = "https://example.com/form-download.html";
+      }
+
+      event.preventDefault(); // Stop form from actually submitting to Zapier
+    });
+  </script>
+</body>
+</html>
