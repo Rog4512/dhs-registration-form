@@ -1,94 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DHS Class of 1975 - Registration Option 2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DHS Class of 1975 - Option 2 Registration</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
       margin: 0;
       padding: 20px;
+      background-color: #f2f2f2;
     }
     .form-container {
-      background-color: #ffffff;
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     h1, h2 {
       text-align: center;
     }
+    .section {
+      background-color: #f7f7f7;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .field-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .field {
+      flex: 1 1 48%;
+      display: flex;
+      flex-direction: column;
+    }
     label {
-      display: block;
-      margin-top: 15px;
+      font-weight: bold;
+      margin-bottom: 5px;
     }
     input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
+      padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-    button {
-      margin-top: 20px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #e0e0e0;
+    }
+    .submit-button {
+      display: block;
+      width: 100%;
       padding: 12px;
       background-color: black;
       color: white;
       border: none;
-      width: 100%;
+      border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
-    }
-    .disclosure {
-      font-size: 0.9em;
-      margin-top: 20px;
-      color: #555;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
     <h1>DHS Class of 1975</h1>
-    <h2>50-Year Reunion Registration - Option 2</h2>
-    <form action="https://hooks.zapier.com/hooks/catch/YOUR_ZAP_ID/" method="POST">
-      <label for="first-name">First Name</label>
-      <input type="text" id="first-name" name="First Name" required />
+    <h2>50-Year Reunion Registration</h2>
+    <p style="text-align: center; font-weight: bold;">Registration Option #2<br>Register Online, Payment: Check by Mail</p>
 
-      <label for="last-name">1975 Last Name</label>
-      <input type="text" id="last-name" name="1975 Last Name" required />
-
-      <label for="guest-name">Spouse/Guest Name (if attending)</label>
-      <input type="text" id="guest-name" name="Spouse/Guest Name" />
-
-      <label for="mailing-address">Mailing Address</label>
-      <input type="text" id="mailing-address" name="Mailing Address" required />
-
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="Email Address" required />
-
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="Phone Number" required />
-
-      <label for="notes">Notes or Special Needs</label>
-      <textarea id="notes" name="Notes"></textarea>
-
-      <!-- Additional fields for event attendance, etc. can be inserted here -->
-
-      <div class="disclosure">
-        For your privacy, we do not see or store any payment information. After submitting this form, please mail your check to:<br><br>
-        <strong>Nancy Broadstone</strong><br>
-        Dyer County Trustee<br>
-        P.O. Box 1360<br>
-        Dyersburg, TN 38025-1360<br><br>
-        Please include your name on the check memo. Your registration will be recorded upon receipt.
+    <form>
+      <!-- SECTION 1: Lookup and Info -->
+      <div class="section">
+        <div class="field-group">
+          <div class="field">
+            <label for="firstName1975">1975 First Name</label>
+            <input type="text" id="firstName1975" name="firstName1975">
+          </div>
+          <div class="field">
+            <label for="lastName1975">1975 Last Name</label>
+            <input type="text" id="lastName1975" name="lastName1975">
+          </div>
+        </div>
+        <p style="text-align: center; font-style: italic;">Enter your 1975 name to look up and update your registration data.</p>
+        <div class="field-group">
+          <div class="field">
+            <label for="currentName">Spouse/Guest Name (if attending)</label>
+            <input type="text" id="guestName" name="guestName">
+          </div>
+          <div class="field">
+            <label for="address">Mailing Address</label>
+            <input type="text" id="address" name="address">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email">
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+        </div>
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="2"></textarea>
+        </div>
       </div>
 
-      <button type="submit">Submit Registration</button>
+      <!-- SECTION 2: Events -->
+      <div class="section">
+        <h3 style="text-align: center;">Event Attendance</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th colspan="2">Attending?</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>Classmate</th>
+              <th>Guest</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Friday School Tour (4:00 PM)</td><td><select><option></option><option>Y</option><option>N</option></select></td><td><select><option></option><option>Y</option><option>N</option></select></td></tr>
+            <tr><td>Friday Tailgate Party (6:00 PM)</td><td><select><option></option><option>Y</option><option>N</option></select></td><td><select><option></option><option>Y</option><option>N</option></select></td></tr>
+            <tr><td>Friday Football Game (7:30 PM)</td><td><select><option></option><option>Y</option><option>N</option></select></td><td><select><option></option><option>Y</option><option>N</option></select></td></tr>
+            <tr><td>Saturday School Tour (1:00 PM)</td><td><select><option></option><option>Y</option><option>N</option></select></td><td><select><option></option><option>Y</option><option>N</option></select></td></tr>
+            <tr><td>Saturday Breakfast (Time TBD)</td><td><select><option></option><option>Y</option><option>N</option></select></td><td><select><option></option><option>Y</option><option>N</option></select></td></tr>
+            <tr><td>Golf at The Farms (10:00 AM)</td><td><select><option></option><option>Y</option><option>N</option></select></td><td><select><option></option><option>Y</option><option>N</option></select></td></tr>
+            <tr><td>Saturday Reunion Dinner (6:00 PM)</td><td><select><option></option><option>Y</option><option>N</option></select></td><td><select><option></option><option>Y</option><option>N</option></select></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SECTION 3: Mailing Instructions -->
+      <div class="section">
+        <h3 style="text-align: center;">Payment Instructions</h3>
+        <p>Please note classmate's name in the check memo if not on the check. Mail your check to:</p>
+        <p>
+          Nancy Broadstone<br>
+          Dyer County Trustee<br>
+          P.O. Box 1360<br>
+          Dyersburg, TN 38025-1360
+        </p>
+      </div>
+
+      <button type="submit" class="submit-button">Submit Registration</button>
     </form>
   </div>
 </body>
 </html>
+
