@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DHS Class of 1975 - Option 2 Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .form-section {
+      background: #eeeeee;
+      border: 2px solid #cccccc;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .form-section input, .form-section select {
+      background: #ffffff;
+      border: 1px solid #ccc;
+      padding: 8px;
+      width: calc(100% - 20px);
+      margin-top: 5px;
+    }
+    .inline-inputs {
+      display: flex;
+      gap: 10px;
+    }
+    .inline-inputs div {
+      flex: 1;
+    }
+    .events-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .events-table th, .events-table td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: center;
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: black;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <form id="registrationForm">
+    <div class="form-section" id="lookupSection">
+      <h3>DHS Class of 1975</h3>
+      <p>50-Year Reunion Registration</p>
+      <p><strong>Registration Option #2: Register Online, Pay by Check</strong></p>
+      <div class="inline-inputs">
+        <div>
+          <label for="lookupFirst">1975 First Name:</label>
+          <input type="text" id="lookupFirst" name="lookupFirst" required />
+        </div>
+        <div>
+          <label for="lookupLast">1975 Last Name:</label>
+          <input type="text" id="lookupLast" name="lookupLast" required />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section" id="infoSection">
+      <div>
+        <label for="classmateName">Classmate Name:</label>
+        <input type="text" id="classmateName" name="classmateName" />
+      </div>
+      <div>
+        <label for="maidenName">1975 Name (if different):</label>
+        <input type="text" id="maidenName" name="maidenName" />
+      </div>
+      <div>
+        <label for="guestName">Spouse/Guest Name:</label>
+        <input type="text" id="guestName" name="guestName" />
+      </div>
+      <div>
+        <label for="address">Mailing Address:</label>
+        <input type="text" id="address" name="address" />
+      </div>
+      <div>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" />
+      </div>
+      <div>
+        <label for="notes">Notes:</label>
+        <input type="text" id="notes" name="notes" />
+      </div>
+    </div>
+
+    <div class="form-section" id="eventsSection">
+      <p><strong>Please indicate your plans to attend the following events:</strong></p>
+      <table class="events-table">
+        <tr>
+          <th>Event</th>
+          <th colspan="2">Attending?</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Classmate</th>
+          <th>Guest</th>
+        </tr>
+        <tr>
+          <td>Friday School Tour (Sept 19, 1:00 PM)</td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+        </tr>
+        <tr>
+          <td>Friday Tailgate Party (Sept 19, 5:00 PM)</td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+        </tr>
+        <tr>
+          <td>Friday DHS Game (Sept 19, 7:00 PM)</td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+        </tr>
+        <tr>
+          <td>Saturday School Tour (Sept 20, 10:00 AM)</td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+        </tr>
+        <tr>
+          <td>Saturday Breakfast (Sept 20, 8:00 AM)</td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+        </tr>
+        <tr>
+          <td>Saturday Golf (Sept 20, 1:00 PM)</td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+        </tr>
+        <tr>
+          <td>Reunion Dinner (Sept 20, 6:30 PM)</td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+          <td><select><option></option><option>Y</option><option>N</option></select></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="form-section">
+      <p><strong>Please Note:</strong> Add the classmate’s name to the check memo if not obvious. Mail your check to:</p>
+      <p><strong>Nancy Broadstone</strong><br/>
+      Dyer County Trustee<br/>
+      P.O. Box 1360<br/>
+      Dyersburg, TN 38025-1360</p>
+    </div>
+
+    <button class="submit-btn" type="submit">Submit Registration</button>
+  </form>
+</body>
+</html>
