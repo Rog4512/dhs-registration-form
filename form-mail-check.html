@@ -161,6 +161,29 @@
       <label>Notes:</label>
       <textarea name="notes" rows="3"></textarea>
 
+      <table class="events-table">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th colspan="2">Attending?</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Classmate</th>
+            <th>Guest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Friday Tour – Sept. 19, 10:00 AM</strong></td><td><select name="eventFridayTourClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventFridayTourGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Tailgate Party – Sept. 19, 5:00 PM</strong></td><td><select name="eventTailgateClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventTailgateGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>DHS Football Game – Sept. 19, 7:00 PM</strong></td><td><select name="eventGameClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGameGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Saturday Tour – Sept. 20, 10:00 AM</strong></td><td><select name="eventSaturdayTourClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventSaturdayTourGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Saturday Breakfast – Sept. 20, 9:00 AM</strong></td><td><select name="eventBreakfastClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventBreakfastGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Saturday Golf – Sept. 20, 1:00 PM</strong></td><td><select name="eventGolfClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGolfGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Reunion Dinner – Sept. 20, 6:00 PM</strong></td><td><select name="eventDinnerClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventDinnerGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+        </tbody>
+      </table>
+
       <label>Legacy Fund Contribution (optional)
         <span class="info-link" onclick="document.getElementById('popup').style.display='block';document.getElementById('overlay').style.display='block';">(What’s this?)</span>
       </label>
