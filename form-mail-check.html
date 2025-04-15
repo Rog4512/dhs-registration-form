@@ -102,7 +102,29 @@
       color: #0066cc;
       cursor: pointer;
     }
+    .summary-box {
+      background: #e8f0fe;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 6px;
+      text-align: left;
+      font-size: 1rem;
+    }
   </style>
+  <script>
+    function updateSummary() {
+      const guestName = document.querySelector('[name="guest_name"]').value;
+      const legacyFund = parseFloat(document.querySelector('[name="legacyFund"]').value) || 0;
+      const attendees = guestName.trim() ? 2 : 1;
+      const fee = 45;
+      const total = (attendees * fee) + legacyFund;
+
+      document.getElementById('summary-attendees').innerText = attendees;
+      document.getElementById('summary-cost').innerText = `$${(attendees * fee).toFixed(2)}`;
+      document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+      document.getElementById('summary-total').innerText = `$${total.toFixed(2)}`;
+    }
+  </script>
 </head>
 <body>
   <div class="form-container">
@@ -110,7 +132,7 @@
     <h2>50-Year Reunion Registration</h2>
     <h3>Registration Option #2: Register Online, Pay by Check</h3>
 
-    <form action="https://script.google.com/macros/s/AKfycbwiR7gW_NZeZYWkF20vb__4s7MJwEXIWAM7h3_spZGLRVQIWYQYEkgCSo71RpwHq7fdhw/exec" method="POST">
+    <form action="https://script.google.com/macros/s/AKfycbwiR7gW_NZeZYWkF20vb__4s7MJwEXIWAM7h3_spZGLRVQIWYQYEkgCSo71RpwHq7fdhw/exec" method="POST" oninput="updateSummary()">
 
       <label>Classmate Name:</label>
       <input type="text" name="classmate_name" required />
@@ -154,7 +176,13 @@
       </div>
       <div id="overlay" class="popup-overlay" onclick="document.getElementById('popup').style.display='none';document.getElementById('overlay').style.display='none';"></div>
 
-      <!-- Event table and mail section remain the same -->
+      <div class="summary-box">
+        <h4>Registration Summary</h4>
+        <p><strong>Attendees:</strong> <span id="summary-attendees">1</span></p>
+        <p><strong>Reunion Fee:</strong> <span id="summary-cost">$45.00</span></p>
+        <p><strong>Legacy Fund Contribution:</strong> <span id="summary-legacy">$0.00</span></p>
+        <p><strong>Total Amount Due:</strong> <span id="summary-total">$45.00</span></p>
+      </div>
 
       <div class="mail-section">
         <p style='font-size: 0.9em;'><strong>Please note the classmate's name in the check memo line (if it's not obvious from the check).</strong></p>
@@ -168,4 +196,5 @@
   </div>
 </body>
 </html>
+
 
