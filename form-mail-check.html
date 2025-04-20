@@ -1,3 +1,5 @@
+<!-- Live Web App URL for Option 2:
+https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,13 +128,14 @@
     }
   </script>
 </head>
+
 <body>
   <div class="form-container">
     <h1>DHS Class of 1975</h1>
     <h2>50-Year Reunion Registration</h2>
     <h3>Registration Option #2: Register Online, Pay by Check</h3>
 
-    <form action="https://script.google.com/macros/s/AKfycbwiR7gW_NZeZYWkF20vb__4s7MJwEXIWAM7h3_spZGLRVQIWYQYEkgCSo71RpwHq7fdhw/exec" method="POST" oninput="updateSummary()">
+    <form action="https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec" method="POST" oninput="updateSummary()">
 
       <label>Classmate Name:</label>
       <input type="text" name="classmate_name" required />
@@ -174,13 +177,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>Friday Tour – Sept. 19, 10:00 AM</strong></td><td><select name="eventFridayTourClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventFridayTourGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td><strong>Tailgate Party – Sept. 19, 5:00 PM</strong></td><td><select name="eventTailgateClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventTailgateGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td><strong>DHS Football Game – Sept. 19, 7:00 PM</strong></td><td><select name="eventGameClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGameGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td><strong>Saturday Breakfast – Sept. 20, 9:00 AM</strong></td><td><select name="eventBreakfastClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventBreakfastGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td><strong>Saturday Tour – Sept. 20, 10:00 AM</strong></td><td><select name="eventSaturdayTourClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventSaturdayTourGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td><strong>Saturday Golf – Sept. 20, 1:00 PM</strong></td><td><select name="eventGolfClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGolfGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td><strong>Reunion Dinner – Sept. 20, 6:00 PM</strong></td><td><select name="eventDinnerClassmate" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td><td><select name="eventDinnerGuest" style='width: 90px;'><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Friday Tour – Sept. 19, 10:00 AM</strong></td><td><select name="eventFridayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventFridayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Tailgate Party – Sept. 19, 5:00 PM</strong></td><td><select name="eventTailgateClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventTailgateGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>DHS Football Game – Sept. 19, 7:00 PM</strong></td><td><select name="eventGameClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGameGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Saturday Breakfast – Sept. 20, 9:00 AM</strong></td><td><select name="eventBreakfastClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventBreakfastGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Saturday Tour – Sept. 20, 10:00 AM</strong></td><td><select name="eventSaturdayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventSaturdayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Saturday Golf – Sept. 20, 1:00 PM</strong></td><td><select name="eventGolfClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGolfGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td><strong>Reunion Dinner – Sept. 20, 6:00 PM</strong></td><td><select name="eventDinnerClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventDinnerGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
         </tbody>
       </table>
 
@@ -215,7 +218,6 @@
 
       <button type="submit" class="submit-btn">Submit Registration</button>
     </form>
-
   </div>
 </body>
 </html>
