@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DHS Class of 1975 - 50-Year Reunion Registration (Option 2)</title>
   <style>
     body {
@@ -18,7 +18,7 @@
       margin: auto;
       border-radius: 8px;
     }
-    h1, h2 {
+    h1, h2, h3 {
       text-align: center;
     }
     label {
@@ -33,6 +33,9 @@
       background-color: #ffffff;
       border: 1px solid #ccc;
       border-radius: 4px;
+    }
+    select {
+      width: 80px;
     }
     .events-table {
       width: 100%;
@@ -49,9 +52,6 @@
     .events-table td {
       background-color: #ffffff;
     }
-    select {
-      width: 80px;
-    }
     .submit-btn {
       margin-top: 30px;
       width: 100%;
@@ -63,79 +63,29 @@
       border-radius: 6px;
       cursor: pointer;
     }
-    .mail-section {
-      background: #f0f0f0;
-      padding: 15px;
-      margin-top: 30px;
-      text-align: center;
-      border-radius: 6px;
-    }
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      z-index: 1000;
-      max-width: 400px;
-    }
-    .popup-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 999;
-    }
-    .popup-close {
-      float: right;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .info-link {
-      font-size: 0.9em;
-      margin-left: 6px;
-      color: #0066cc;
-      cursor: pointer;
-    }
-    .summary-box {
+    .summary-box, .mail-section, .thank-you {
       background: #e8f0fe;
       padding: 15px;
       margin-top: 30px;
       border-radius: 6px;
-      text-align: left;
+      text-align: center;
       font-size: 1rem;
     }
-  </style>
-  <script>
-    function updateSummary() {
-      const guestName = document.querySelector('[name="guest_name"]').value;
-      const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
-      const attendees = guestName.trim() ? 2 : 1;
-      const fee = 45;
-      const total = (attendees * fee) + legacyFund;
-
-      document.getElementById('summary-attendees').innerText = attendees;
-      document.getElementById('summary-cost').innerText = `$${(attendees * fee).toFixed(2)}`;
-      document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
-      document.getElementById('summary-total').innerText = `$${total.toFixed(2)}`;
-      document.getElementById('hiddenTotalDue').value = total.toFixed(2);
+    .thank-you {
+      display: none;
+      background-color: #dff0d8;
+      color: #3c763d;
+      padding: 25px;
     }
-  </script>
+  </style>
 </head>
 <body>
   <div class="form-container">
     <h1>DHS Class of 1975</h1>
     <h2>50-Year Reunion Registration</h2>
     <h3>Registration Option #2: Register Online, Pay by Check</h3>
-    <form action="https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec" method="POST" oninput="updateSummary()">  
+
+    <form id="reunionForm" onsubmit="submitForm(event)">
       <input type="hidden" name="RegistrationFee" value="45">
       <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="45">
 
@@ -162,17 +112,8 @@
         </tbody>
       </table>
 
-      <label>Legacy Fund Contribution (optional)
-        <span class="info-link" onclick="document.getElementById('popup').style.display='block';document.getElementById('overlay').style.display='block';">(What’s this?)</span>
-      </label>
+      <label>Legacy Fund Contribution (optional)</label>
       <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
-
-      <div id="popup" class="popup">
-        <span class="popup-close" onclick="document.getElementById('popup').style.display='none';document.getElementById('overlay').style.display='none';">&times;</span>
-        <h4>About the Legacy Fund</h4>
-        <p>The Legacy Fund exists to quietly support classmates who may need a little help — covering reunion costs, sending flowers during illness, or offering gestures of care. It’s our way of taking care of each other.</p>
-      </div>
-      <div id="overlay" class="popup-overlay" onclick="document.getElementById('popup').style.display='none';document.getElementById('overlay').style.display='none';"></div>
 
       <div class="summary-box">
         <h4>Registration Summary</h4>
@@ -183,23 +124,61 @@
       </div>
 
       <div class="mail-section">
-        <p style='font-size: 0.9em;'><strong>Please note the classmate's name in the check memo line (if it's not obvious from the check).</strong></p>
-        <p><strong>Mail your check to:</strong></p>
-        <p>Nancy Broadstone<br>Dyer County Trustee<br>P.O. Box 1360<br>Dyersburg, TN 38025-1360</p>
+        <p><strong>Please note the classmate's name in the check memo line (if it's not obvious from the check).</strong></p>
+        <p><strong>Mail your check to:</strong><br>Nancy Broadstone<br>Dyer County Trustee<br>P.O. Box 1360<br>Dyersburg, TN 38025-1360</p>
       </div>
-<div class="summary-box">
-  <h4>You're Almost Done!</h4>
-  <p>When you click <strong>Submit Registration</strong>, your information will be securely recorded.</p>
-  <p><strong>A confirmation email</strong> will be sent with payment details and event instructions.</p>
-  <p>We’re excited to celebrate with you!</p>
-  <p style="margin-top: 10px;"><em>– DHS 50-Year Reunion Committee</em></p>
-  <p style="font-size: 0.9em;">📧 Email: <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a></p>
-</div>
+
+      <p style="margin-top: 30px; font-size: 0.95em; color: #333;">
+        A confirmation of your registration will be emailed to you immediately. Thank you for registering.<br />
+        Click "Submit Registration" to continue. Check your email and we will see you soon!<br />
+        <em>- DHS 50-Year Reunion Committee<br>Email: <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a></em>
+      </p>
 
       <button type="submit" class="submit-btn">Submit Registration</button>
     </form>
+
+    <div id="thankYouMessage" class="thank-you">
+      <h2>🎉 Thank You for Registering!</h2>
+      <p>Your form was submitted successfully.</p>
+    </div>
   </div>
+
+  <script>
+    function updateSummary() {
+      const guestName = document.querySelector('[name="guest_name"]').value;
+      const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
+      const attendees = guestName.trim() ? 2 : 1;
+      const fee = 45;
+      const total = (attendees * fee) + legacyFund;
+      document.getElementById('summary-attendees').innerText = attendees;
+      document.getElementById('summary-cost').innerText = `$${(attendees * fee).toFixed(2)}`;
+      document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+      document.getElementById('summary-total').innerText = `$${total.toFixed(2)}`;
+      document.getElementById('hiddenTotalDue').value = total.toFixed(2);
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      const form = document.getElementById("reunionForm");
+      const formData = new FormData(form);
+
+      fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+      })
+      .then(() => {
+        form.style.display = "none";
+        document.getElementById("thankYouMessage").style.display = "block";
+      })
+      .catch((error) => {
+        alert("Something went wrong. Please try again later.");
+        console.error("Submission error:", error);
+      });
+    }
+  </script>
 </body>
 </html>
+
 
 
