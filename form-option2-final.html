@@ -82,13 +82,16 @@
 
 <body>
   <div class="form-container">
+    <!-- Reunion Fee Setting: Easy to Update -->
+    <input type="hidden" id="currentReunionFee" value="50">
+
     <h1>DHS Class of 1975</h1>
     <h2>50-Year Reunion Registration</h2>
     <h3>Registration Option #2: Register Online, Pay by Check</h3>
 
     <form id="reunionForm" onsubmit="submitForm(event)">
-      <input type="hidden" name="RegistrationFee" value="45">
-      <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="45">
+      <input type="hidden" name="RegistrationFee" value="">
+      <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
 
       <label>Classmate Name:</label><input type="text" name="classmate_name" required />
       <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
@@ -148,7 +151,7 @@
     function updateSummary() {
       const guestName = document.querySelector('[name="guest_name"]').value.trim();
       const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
-      const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
+      const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 50;
       const attendees = guestName ? 2 : 1;
       const reunionFee = attendees * feePerPerson;
       const totalDue = reunionFee + legacyFund;
@@ -160,7 +163,11 @@
       document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
     }
 
-    document.addEventListener("DOMContentLoaded", updateSummary);
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentFee = parseFloat(document.getElementById('currentReunionFee').value) || 50;
+      document.querySelector('[name="RegistrationFee"]').value = currentFee;
+      updateSummary();
+    });
 
     function submitForm(event) {
       event.preventDefault();
@@ -188,6 +195,7 @@
 
 </body>
 </html>
+
 
 
 
