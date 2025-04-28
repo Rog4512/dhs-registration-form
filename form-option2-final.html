@@ -146,16 +146,18 @@
 
   <script>
     function updateSummary() {
-      const guestName = document.querySelector('[name="guest_name"]').value;
+      const guestName = document.querySelector('[name="guest_name"]').value.trim();
       const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
-      const attendees = guestName.trim() ? 2 : 1;
-      const fee = 45;
-      const total = (attendees * fee) + legacyFund;
+      const attendees = guestName ? 2 : 1;
+      const feePerPerson = 45;
+      const reunionFee = attendees * feePerPerson;
+      const totalDue = reunionFee + legacyFund;
+
       document.getElementById('summary-attendees').innerText = attendees;
-      document.getElementById('summary-cost').innerText = `$${(attendees * fee).toFixed(2)}`;
+      document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
       document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
-      document.getElementById('summary-total').innerText = `$${total.toFixed(2)}`;
-      document.getElementById('hiddenTotalDue').value = total.toFixed(2);
+      document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+      document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
     }
 
     function submitForm(event) {
