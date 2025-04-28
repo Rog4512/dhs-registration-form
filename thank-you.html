@@ -2,41 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Thank You for Registering</title>
+  <title>Thank You for Registering!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background-color: #f5f5f5;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100vh;
       margin: 0;
+      background: #f5f5f5;
+      padding: 20px;
     }
-    .thank-you-box {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .thank-you-container {
+      background: #f0f0f0;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      margin-top: 30px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1 {
+    h1, h2 {
       color: #4B0082;
-      margin-bottom: 20px;
     }
     p {
-      font-size: 18px;
+      font-size: 1rem;
       color: #333;
+      margin: 10px 0;
+    }
+    .section {
+      margin-top: 30px;
+      text-align: left;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .download-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: black;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .reminder {
+      margin-top: 30px;
+      font-style: italic;
+      color: #555;
+      font-size: 0.95rem;
     }
   </style>
 </head>
+
 <body>
-  <div class="thank-you-box">
+  <div class="thank-you-container">
     <h1>🎉 Thank You for Registering!</h1>
-    <p>Your submission has been received.</p>
-    <p>We can’t wait to see you at the reunion!</p>
+    <p id="personalMessage"></p>
+
+    <div class="section" id="registrationSummary">
+      <div class="section-title">Registration Summary:</div>
+      <p><strong>Classmate Name:</strong> <span id="classmateName"></span></p>
+      <p id="guestInfo"></p>
+      <div id="eventSummary"></div>
+      <p><strong>Legacy Fund Contribution:</strong> $<span id="legacyFund"></span></p>
+      <p><strong>Total Amount Due:</strong> $<span id="totalDue"></span></p>
+    </div>
+
+    <div class="section" id="emailInstructions">
+      <div class="section-title">Next Steps:</div>
+      <p id="emailMessage"></p>
+      <div id="downloadSection" style="display:none;">
+        <p><strong>Since no email was provided:</strong></p>
+        <p>You may download your registration confirmation and mailing instructions here:</p>
+        <a href="YOUR_DOWNLOAD_LINK_HERE" target="_blank" class="download-link">Download Instructions</a>
+        <p>Or call Roger Walker at (XXX) XXX-XXXX to request copies by mail.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Mail Your Check To:</div>
+      <p>Nancy Broadstone</p>
+      <p>Dyer County Trustee</p>
+      <p>P.O. Box 1360</p>
+      <p>Dyersburg, TN 38025-1360</p>
+      <p><strong>Don't forget to include the classmate’s name on the memo line of your check!</strong></p>
+    </div>
+
+    <p class="reminder">✉️ Before you exit this page, please check your email for your official Reunion Registration Confirmation and Agenda. If you don't see it within a few minutes, check your spam/junk folder or contact Roger Walker for assistance.</p>
+
+    <p style="margin-top: 40px;"><em>We can’t wait to see you at the reunion!</em></p>
   </div>
+
+  <script>
+    function getParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name) || '';
+    }
+
+    function formatEvent(name, value) {
+      if (value === 'Y') return `<p><strong>${name}:</strong> Yes</p>`;
+      if (value === 'N') return `<p><strong>${name}:</strong> No</p>`;
+      return '';
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const classmateName = getParam('classmate_name');
+      const guestName = getParam('guest_name');
+      const legacyFund = getParam('legacy_fund') || "0.00";
+      const totalDue = getParam('TotalDue') || "0.00";
+      const email = getParam('email');
+
+      document.getElementById('personalMessage').innerText = `Thank you, ${classmateName}, for completing your reunion registration!`;
+
+      document.getElementById('classmateName').innerText = classmateName;
+
+      if (guestName.trim() !== '') {
+        document.getElementById('guestInfo').innerHTML = `<strong>Guest Name:</strong> ${guestName}`;
+      } else {
+        document.getElementById('guestInfo').style.display = 'none';
+      }
+
+      const eventNames = [
+        ['Friday Tour', 'eventFridayTourClassmate', 'eventFridayTourGuest'],
+        ['Tailgate Party', 'eventTailgateClassmate', 'eventTailgateGuest'],
+        ['Football Game', 'eventGameClassmate', 'eventGameGuest'],
+        ['Saturday Tour', 'eventSaturdayTourClassmate', 'eventSaturdayTourGuest'],
+        ['Saturday Breakfast', 'eventBreakfastClassmate', 'eventBreakfastGuest'],
+        ['Saturday Golf', 'eventGolfClassmate', 'eventGolfGuest'],
+        ['Reunion Dinner', 'eventDinnerClassmate', 'eventDinnerGuest'],
+      ];
+
+      let eventDetails = '';
+      eventNames.forEach(([label, classmateField, guestField]) => {
+        const classmateChoice = getParam(classmateField);
+        const guestChoice = getParam(guestField);
+        if (classmateChoice) eventDetails += formatEvent(`${label} (Classmate)`, classmateChoice);
+        if (guestChoice) eventDetails += formatEvent(`${label} (Guest)`, guestChoice);
+      });
+      document.getElementById('eventSummary').innerHTML = eventDetails;
+
+      document.getElementById('legacyFund').innerText = parseFloat(legacyFund).toFixed(2);
+      document.getElementById('totalDue').innerText = parseFloat(totalDue).toFixed(2);
+
+      if (email.trim() !== '') {
+        document.getElementById('emailMessage').innerText = "You will receive a confirmation email with your registration summary and mailing instructions shortly.";
+      } else {
+        document.getElementById('emailInstructions').style.display = "block";
+        document.getElementById('downloadSection').style.display = "block";
+      }
+    });
+  </script>
+
 </body>
 </html>
