@@ -160,6 +160,8 @@
       document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
     }
 
+    document.addEventListener("DOMContentLoaded", updateSummary);
+
     function submitForm(event) {
       event.preventDefault();
       const form = document.getElementById("reunionForm");
@@ -186,6 +188,7 @@
 
 </body>
 </html>
+
 
 
 
