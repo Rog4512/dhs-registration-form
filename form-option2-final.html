@@ -148,8 +148,8 @@
     function updateSummary() {
       const guestName = document.querySelector('[name="guest_name"]').value.trim();
       const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
+      const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
       const attendees = guestName ? 2 : 1;
-      const feePerPerson = 45;
       const reunionFee = attendees * feePerPerson;
       const totalDue = reunionFee + legacyFund;
 
@@ -165,14 +165,12 @@
       const form = document.getElementById("reunionForm");
       const formData = new FormData(form);
 
-      // Post to Google Apps Script
       fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
         method: "POST",
         body: formData,
         mode: "no-cors"
       })
       .then(() => {
-        // Redirect with form data to Thank You page
         let params = new URLSearchParams();
         formData.forEach((value, key) => {
           params.append(key, value);
