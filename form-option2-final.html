@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.1.4 | Date: 2025-04-30 | ERP_2.1.4_2025-04-30 -->
+<!-- Version: 2.1.5 | Date: 2025-04-30 | ERP_2.1.5_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -180,7 +180,6 @@
 
     document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
     document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
-
     document.querySelectorAll('select').forEach(dropdown => {
       dropdown.addEventListener('change', updateSummary);
     });
@@ -189,6 +188,17 @@
     if (phoneInput) {
       phoneInput.addEventListener('blur', function() {
         phoneInput.value = formatPhoneNumber(phoneInput.value);
+      });
+    }
+
+    const emailField = document.querySelector('[name="email"]');
+    if (emailField) {
+      emailField.addEventListener('input', function () {
+        if (emailField.value.trim() !== '' && !isValidEmail(emailField.value)) {
+          emailField.classList.add('invalid');
+        } else {
+          emailField.classList.remove('invalid');
+        }
       });
     }
   });
@@ -230,6 +240,7 @@
 
 </body>
 </html>
+
 
 
 
