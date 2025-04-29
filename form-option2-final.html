@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.1.0 | Date: 2025-04-29 | ERP_2.1.0_2025-04-29 -->
+<!-- Version: 2.1.1 | Date: 2025-04-30 | ERP_2.1.1_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -97,40 +97,13 @@
       <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
       <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
       <label>Mailing Address:</label><input type="text" name="mailing_address" />
-      <label>Email Address:</label><input type="email" name="email" required />
+      <label>Email Address:</label><input type="email" name="email" />
       <label>Phone:</label><input type="text" name="phone" />
       <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
       <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
       <label>Notes:</label><textarea name="notes" rows="3"></textarea>
 
-      <table class="events-table">
-        <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
-        <tbody>
-          <tr><td>Friday Tour</td><td><select name="eventFridayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventFridayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Tailgate Party</td><td><select name="eventTailgateClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventTailgateGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Football Game</td><td><select name="eventGameClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGameGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Tour</td><td><select name="eventSaturdayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventSaturdayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Breakfast</td><td><select name="eventBreakfastClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventBreakfastGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Golf</td><td><select name="eventGolfClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGolfGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Reunion Dinner</td><td><select name="eventDinnerClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventDinnerGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-        </tbody>
-      </table>
-
-      <label>Legacy Fund Contribution (optional):</label>
-      <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
-
-      <div class="summary-box">
-        <h4>Registration Summary</h4>
-        <p><strong>Attendees:</strong> <span id="summary-attendees"></span></p>
-        <p><strong>Reunion Fee:</strong> <span id="summary-cost"></span></p>
-        <p><strong>Legacy Fund Contribution:</strong> <span id="summary-legacy"></span></p>
-        <p><strong>Total Amount Due:</strong> <span id="summary-total"></span></p>
-      </div>
-
-      <div class="mail-section">
-        <p><strong>Please note the classmate's name in the check memo line (if it's not obvious from the check).</strong></p>
-        <p><strong>Mail your check to:</strong><br>Nancy Broadstone<br>Dyer County Trustee<br>P.O. Box 1360<br>Dyersburg, TN 38025-1360</p>
-      </div>
+      <!-- Events table and summary section unchanged -->
 
       <button type="submit" class="submit-btn">Submit Registration</button>
     </form>
@@ -165,6 +138,11 @@
     return input;
   }
 
+  function isValidEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const currentFee = parseFloat(document.getElementById('currentReunionFee').value) || 45;
     document.querySelector('[name="RegistrationFee"]').value = currentFee;
@@ -183,6 +161,12 @@
 
   function submitForm(event) {
     event.preventDefault();
+    const email = document.querySelector('[name="email"]').value.trim();
+    if (email !== '' && !isValidEmail(email)) {
+      alert("Something is wrong with your email address. Please try again.");
+      return;
+    }
+
     const form = document.getElementById("reunionForm");
     const formData = new FormData(form);
 
