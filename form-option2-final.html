@@ -5,32 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DHS Class of 1975 - 50-Year Reunion Registration (Option 2)</title>
   <style>
-    /* (Your existing CSS remains unchanged) */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .form-container {
+      background: #f0f0f0;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 8px;
+    }
+    h1, h2, h3 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="email"], input[type="number"], textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    select {
+      width: 80px;
+    }
+    .events-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    .events-table th, .events-table td {
+      padding: 10px;
+      text-align: center;
+    }
+    .events-table th {
+      background-color: #e0e0e0;
+    }
+    .events-table td {
+      background-color: #ffffff;
+    }
+    .submit-btn {
+      margin-top: 30px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .summary-box, .mail-section, .thank-you {
+      background: #e8f0fe;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .thank-you {
+      display: none;
+      background-color: #dff0d8;
+      color: #3c763d;
+      padding: 25px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="form-container">
-    <input type="hidden" id="currentReunionFee" value="45">
+<div class="form-container">
+  <input type="hidden" id="currentReunionFee" value="45">
 
-    <h1>DHS Class of 1975</h1>
-    <h2>50-Year Reunion Registration</h2>
-    <h3>Registration Option #2: Register Online, Pay by Check</h3>
+  <h1>DHS Class of 1975</h1>
+  <h2>50-Year Reunion Registration</h2>
+  <h3>Registration Option #2: Register Online, Pay by Check</h3>
 
-    <form id="reunionForm" onsubmit="submitForm(event)">
-      <input type="hidden" name="RegistrationFee" value="">
-      <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
+  <form id="reunionForm" onsubmit="submitForm(event)">
+    <input type="hidden" name="RegistrationFee" value="">
+    <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
 
-      <!-- (Your existing input fields remain unchanged) -->
+    <label>Classmate Name:</label><input type="text" name="classmate_name" required />
+    <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
+    <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
+    <label>Mailing Address:</label><input type="text" name="mailing_address" />
+    <label>Email Address:</label><input type="email" name="email" required />
+    <label>Phone:</label><input type="text" name="phone" />
+    <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
+    <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
+    <label>Notes:</label><textarea name="notes" rows="3"></textarea>
 
-      <button type="submit" class="submit-btn">Submit Registration</button>
-    </form>
+    <table class="events-table">
+      <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
+      <tbody>
+        <tr><td>Friday Tour</td><td><select name="eventFridayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventFridayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+        <tr><td>Tailgate Party</td><td><select name="eventTailgateClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventTailgateGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+        <tr><td>Football Game</td><td><select name="eventGameClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGameGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+        <tr><td>Saturday Tour</td><td><select name="eventSaturdayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventSaturdayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+        <tr><td>Saturday Breakfast</td><td><select name="eventBreakfastClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventBreakfastGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+        <tr><td>Saturday Golf</td><td><select name="eventGolfClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGolfGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+        <tr><td>Reunion Dinner</td><td><select name="eventDinnerClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventDinnerGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+      </tbody>
+    </table>
 
-    <div id="thankYouMessage" class="thank-you">
-      <h2>Thank You for Registering!</h2>
-      <p>Your form was submitted successfully.</p>
-    </div>
+    <label>Legacy Fund Contribution (optional):</label>
+    <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
+
+    <button type="submit" class="submit-btn">Submit Registration</button>
+  </form>
+
+  <div id="thankYouMessage" class="thank-you">
+    <h2>Thank You for Registering!</h2>
+    <p>Your form was submitted successfully.</p>
   </div>
+</div>
 
 <script>
   function updateSummary() {
@@ -41,10 +136,10 @@
     const reunionFee = attendees * feePerPerson;
     const totalDue = reunionFee + legacyFund;
 
-    document.getElementById('summary-attendees').innerText = attendees;
-    document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
-    document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
-    document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+    document.getElementById('summary-attendees')?.innerText = attendees;
+    document.getElementById('summary-cost')?.innerText = `$${reunionFee.toFixed(2)}`;
+    document.getElementById('summary-legacy')?.innerText = `$${legacyFund.toFixed(2)}`;
+    document.getElementById('summary-total')?.innerText = `$${totalDue.toFixed(2)}`;
     document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
   }
 
@@ -98,6 +193,7 @@
 
 </body>
 </html>
+
 
 
 
