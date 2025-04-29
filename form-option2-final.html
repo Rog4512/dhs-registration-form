@@ -82,7 +82,7 @@
 
 <body>
   <div class="form-container">
-    <!-- Reunion Fee Setting: Easy to Update -->
+    <!-- Reunion Fee Setting -->
     <input type="hidden" id="currentReunionFee" value="45">
 
     <h1>DHS Class of 1975</h1>
@@ -147,51 +147,55 @@
     </div>
   </div>
 
-  <script>
-    function updateSummary() {
-      const guestName = document.querySelector('[name="guest_name"]').value.trim();
-      const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
-      const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 50;
-      const attendees = guestName ? 2 : 1;
-      const reunionFee = attendees * feePerPerson;
-      const totalDue = reunionFee + legacyFund;
+<script>
+  function updateSummary() {
+    const guestName = document.querySelector('[name="guest_name"]').value.trim();
+    const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
+    const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
+    const attendees = guestName ? 2 : 1;
+    const reunionFee = attendees * feePerPerson;
+    const totalDue = reunionFee + legacyFund;
 
-      document.getElementById('summary-attendees').innerText = attendees;
-      document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
-      document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
-      document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
-      document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
-    }
+    document.getElementById('summary-attendees').innerText = attendees;
+    document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
+    document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+    document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+    document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
+  }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const currentFee = parseFloat(document.getElementById('currentReunionFee').value) || 50;
-      document.querySelector('[name="RegistrationFee"]').value = currentFee;
-      updateSummary();
-    });
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentFee = parseFloat(document.getElementById('currentReunionFee').value) || 45;
+    document.querySelector('[name="RegistrationFee"]').value = currentFee;
+    updateSummary();
 
-    function submitForm(event) {
-      event.preventDefault();
-      const form = document.getElementById("reunionForm");
-      const formData = new FormData(form);
+    // ✅ Live updates while typing
+    document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
+    document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
+  });
 
-      fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
-        method: "POST",
-        body: formData,
-        mode: "no-cors"
-      })
-      .then(() => {
-        let params = new URLSearchParams();
-        formData.forEach((value, key) => {
-          params.append(key, value);
-        });
-        window.location.href = "thankyou.html?" + params.toString();
-      })
-      .catch((error) => {
-        alert("Something went wrong. Please try again later.");
-        console.error("Submission error:", error);
+  function submitForm(event) {
+    event.preventDefault();
+    const form = document.getElementById("reunionForm");
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    })
+    .then(() => {
+      let params = new URLSearchParams();
+      formData.forEach((value, key) => {
+        params.append(key, value);
       });
-    }
-  </script>
+      window.location.href = "thankyou.html?" + params.toString();
+    })
+    .catch((error) => {
+      alert("Something went wrong. Please try again later.");
+      console.error("Submission error:", error);
+    });
+  }
+</script>
 
 </body>
 </html>
