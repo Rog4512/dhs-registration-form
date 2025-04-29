@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.1.3 | Date: 2025-04-30 | ERP_2.1.3_2025-04-30 -->
+<!-- Version: 2.1.4 | Date: 2025-04-30 | ERP_2.1.4_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -145,11 +145,92 @@
   </div>
 
 <script>
-// script remains unchanged
+  function updateSummary() {
+    const guestName = document.querySelector('[name="guest_name"]').value.trim();
+    const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
+    const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
+    const attendees = guestName ? 2 : 1;
+    const reunionFee = attendees * feePerPerson;
+    const totalDue = reunionFee + legacyFund;
+
+    document.getElementById('summary-attendees').innerText = attendees;
+    document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
+    document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+    document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+    document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
+  }
+
+  function formatPhoneNumber(input) {
+    const cleaned = ('' + input).replace(/\D/g, '');
+    if (cleaned.length === 10) {
+      return `(${cleaned.substring(0,3)}) ${cleaned.substring(3,6)}-${cleaned.substring(6,10)}`;
+    }
+    return input;
+  }
+
+  function isValidEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentFee = parseFloat(document.getElementById('currentReunionFee').value) || 45;
+    document.querySelector('[name="RegistrationFee"]').value = currentFee;
+    updateSummary();
+
+    document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
+    document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
+
+    document.querySelectorAll('select').forEach(dropdown => {
+      dropdown.addEventListener('change', updateSummary);
+    });
+
+    const phoneInput = document.querySelector('[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener('blur', function() {
+        phoneInput.value = formatPhoneNumber(phoneInput.value);
+      });
+    }
+  });
+
+  function submitForm(event) {
+    event.preventDefault();
+    const emailField = document.querySelector('[name="email"]');
+    const email = emailField.value.trim();
+
+    if (email !== '' && !isValidEmail(email)) {
+      emailField.classList.add('invalid');
+      alert("Please enter a valid email address. It must contain an '@' and a domain like '.com'.");
+      return;
+    } else {
+      emailField.classList.remove('invalid');
+    }
+
+    const form = document.getElementById("reunionForm");
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    })
+    .then(() => {
+      let params = new URLSearchParams();
+      formData.forEach((value, key) => {
+        params.append(key, value);
+      });
+      window.location.href = "thank-you.html?" + params.toString();
+    })
+    .catch((error) => {
+      alert("Something went wrong. Please try again later.");
+      console.error("Submission error:", error);
+    });
+  }
 </script>
 
 </body>
 </html>
+
 
 
 
