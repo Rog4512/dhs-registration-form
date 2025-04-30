@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.2.1 | Date: 2025-04-30 | ERP_2.2.1_2025-04-30 -->
+<!-- Version: 2.2.2 | Date: 2025-04-30 | ERP_2.2.2_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -36,11 +36,11 @@
       border-radius: 4px;
     }
     input.invalid {
-      background-color: #ffe6e6;
-      border: 2px solid red;
+      background-color: #fff8dc;
+      border: 2px solid #ffcc00;
     }
     #emailError {
-      color: red;
+      color: #cc9900;
       font-size: 0.9em;
       margin-top: 5px;
       display: none;
@@ -108,7 +108,7 @@
       <label>Mailing Address:</label><input type="text" name="mailing_address" />
       <label>Email Address:<br><span style="font-weight: normal; font-size: 0.9em;">Please enter a valid email address that you check often. This is how we will send you important reunion updates and confirmations. Don’t forget to check your spam folder if you don’t see anything from us!</span></label>
       <input type="text" name="email" id="email" placeholder="example@gmail.com" />
-      <div id="emailError">Please enter a valid email address (e.g., yourname@example.com).</div>
+      <div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
 
       <label>Phone:</label><input type="text" name="phone" />
       <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
@@ -163,7 +163,7 @@
     const emailInput = document.getElementById("email");
     const emailError = document.getElementById("emailError");
 
-    emailInput.addEventListener("input", () => {
+    emailInput.addEventListener("blur", () => {
       const isValid = isValidEmail(emailInput.value);
       if (isValid || emailInput.value === '') {
         emailInput.classList.remove("invalid");
@@ -186,6 +186,7 @@
 
 </body>
 </html>
+
 
 
 
