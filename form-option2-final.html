@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.2.5 | Date: 2025-04-30 | ERP_2.2.5_2025-04-30 -->
+<!-- Version: 2.2.6 | Date: 2025-04-30 | ERP_2.2.6_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -207,24 +207,49 @@
         emailError.style.display = "block";
       }
     });
-
-    document.getElementById("reunionForm").addEventListener("submit", function(event) {
-      updateSummary(); // Make sure values are current
-
-      const emailVal = emailInput.value.trim();
-      if (!isValidEmail(emailVal)) {
-        emailInput.classList.add("invalid");
-        emailError.style.display = "block";
-        emailWarning.style.display = "block";
-      } else {
-        emailWarning.style.display = "none";
-      }
-    });
   });
+
+  function submitForm(event) {
+    event.preventDefault();
+    updateSummary();
+
+    const form = document.getElementById("reunionForm");
+    const emailInput = document.getElementById("email");
+    const emailWarning = document.getElementById("emailWarning");
+
+    const formData = new FormData(form);
+    const emailVal = emailInput.value.trim();
+
+    if (!isValidEmail(emailVal)) {
+      emailInput.classList.add("invalid");
+      document.getElementById("emailError").style.display = "block";
+      emailWarning.style.display = "block";
+    } else {
+      emailWarning.style.display = "none";
+    }
+
+    fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    })
+    .then(() => {
+      let params = new URLSearchParams();
+      formData.forEach((value, key) => {
+        params.append(key, value);
+      });
+      window.location.href = "thank-you.html?" + params.toString();
+    })
+    .catch((error) => {
+      alert("Something went wrong. Please try again later.");
+      console.error("Submission error:", error);
+    });
+  }
 </script>
 
 </body>
 </html>
+
 
 
 
