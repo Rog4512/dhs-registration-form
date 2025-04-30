@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.1.8 | Date: 2025-04-30 | ERP_2.1.8_2025-04-30 -->
+<!-- Version: 2.1.9 | Date: 2025-04-30 | ERP_2.1.9_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -113,7 +113,21 @@
       <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
       <label>Notes:</label><textarea name="notes" rows="3"></textarea>
 
-      <!-- INSERT EVENTS TABLE HERE IF NOT PRESENT -->
+      <table class="events-table">
+        <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
+        <tbody>
+          <tr><td>Friday Tour</td><td><select name="eventFridayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventFridayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td>Tailgate Party</td><td><select name="eventTailgateClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventTailgateGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td>Football Game</td><td><select name="eventGameClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGameGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td>Saturday Tour</td><td><select name="eventSaturdayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventSaturdayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td>Saturday Breakfast</td><td><select name="eventBreakfastClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventBreakfastGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td>Saturday Golf</td><td><select name="eventGolfClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGolfGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+          <tr><td>Reunion Dinner</td><td><select name="eventDinnerClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventDinnerGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
+        </tbody>
+      </table>
+
+      <label>Legacy Fund Contribution (optional):</label>
+      <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
 
       <div class="summary-box">
         <h4>Registration Summary</h4>
@@ -195,11 +209,6 @@
     const emailInput = document.getElementById('email');
     emailInput.addEventListener('input', validateEmailFormat);
     emailInput.addEventListener('blur', validateEmailFormat);
-    emailInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Tab') {
-        validateEmailFormat();
-      }
-    });
   });
 
   function submitForm(event) {
@@ -233,6 +242,7 @@
 
 </body>
 </html>
+
 
 
 
