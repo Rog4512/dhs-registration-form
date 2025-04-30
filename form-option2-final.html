@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.2.3 | Date: 2025-04-30 | ERP_2.2.3_2025-04-30 -->
+<!-- Version: 2.2.5 | Date: 2025-04-30 | ERP_2.2.5_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -102,7 +102,6 @@
 <body>
   <div class="form-container">
     <input type="hidden" id="currentReunionFee" value="45">
-
     <h1>DHS Class of 1975</h1>
     <h2>50-Year Reunion Registration</h2>
     <h3>Registration Option #2: Register Online, Pay by Check</h3>
@@ -171,7 +170,29 @@
     return pattern.test(email);
   }
 
+  function updateSummary() {
+    const guestName = document.querySelector('[name="guest_name"]').value.trim();
+    const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
+    const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
+    const attendees = guestName ? 2 : 1;
+    const reunionFee = attendees * feePerPerson;
+    const totalDue = reunionFee + legacyFund;
+
+    document.getElementById('summary-attendees').innerText = attendees;
+    document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
+    document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+    document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+    document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
+    const currentFee = parseFloat(document.getElementById('currentReunionFee').value) || 45;
+    document.querySelector('[name="RegistrationFee"]').value = currentFee;
+    updateSummary();
+
+    document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
+    document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
+
     const emailInput = document.getElementById("email");
     const emailError = document.getElementById("emailError");
     const emailWarning = document.getElementById("emailWarning");
@@ -188,6 +209,8 @@
     });
 
     document.getElementById("reunionForm").addEventListener("submit", function(event) {
+      updateSummary(); // Make sure values are current
+
       const emailVal = emailInput.value.trim();
       if (!isValidEmail(emailVal)) {
         emailInput.classList.add("invalid");
@@ -202,6 +225,7 @@
 
 </body>
 </html>
+
 
 
 
