@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.2.0 | Date: 2025-04-30 | ERP_2.2.0_2025-04-30 -->
+<!-- Version: 2.2.1 | Date: 2025-04-30 | ERP_2.2.1_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -152,8 +152,41 @@
       <p>Your form was submitted successfully.</p>
     </div>
   </div>
+
+<script>
+  function isValidEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
+
+    emailInput.addEventListener("input", () => {
+      const isValid = isValidEmail(emailInput.value);
+      if (isValid || emailInput.value === '') {
+        emailInput.classList.remove("invalid");
+        emailError.style.display = "none";
+      } else {
+        emailInput.classList.add("invalid");
+        emailError.style.display = "block";
+      }
+    });
+
+    document.getElementById("reunionForm").addEventListener("submit", function(event) {
+      if (!isValidEmail(emailInput.value)) {
+        emailInput.classList.add("invalid");
+        emailError.style.display = "block";
+        event.preventDefault();
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
+
 
 
 
