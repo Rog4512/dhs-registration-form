@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.1.5 | Date: 2025-04-30 | ERP_2.1.5_2025-04-30 -->
+<!-- Version: 2.1.6 | Date: 2025-04-30 | ERP_2.1.6_2025-04-30 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -27,7 +27,7 @@
       margin-top: 10px;
       font-weight: bold;
     }
-    input[type="text"], input[type="email"], input[type="number"], textarea, select {
+    input[type="text"], input[type="number"], textarea, select {
       width: 100%;
       padding: 8px;
       margin-top: 5px;
@@ -100,7 +100,7 @@
       <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
       <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
       <label>Mailing Address:</label><input type="text" name="mailing_address" />
-      <label>Email Address:</label><input type="email" name="email" id="email" />
+      <label>Email Address:</label><input type="text" name="email" id="email" placeholder="example@gmail.com" />
       <label>Phone:</label><input type="text" name="phone" />
       <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
       <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
@@ -168,9 +168,17 @@
     return input;
   }
 
-  function isValidEmail(email) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
+  function validateEmailFormat() {
+    const emailInput = document.getElementById('email');
+    const email = emailInput.value.trim();
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === '' || pattern.test(email)) {
+      emailInput.classList.remove('invalid');
+      return true;
+    } else {
+      emailInput.classList.add('invalid');
+      return false;
+    }
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -180,9 +188,6 @@
 
     document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
     document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
-    document.querySelectorAll('select').forEach(dropdown => {
-      dropdown.addEventListener('change', updateSummary);
-    });
 
     const phoneInput = document.querySelector('[name="phone"]');
     if (phoneInput) {
@@ -191,29 +196,15 @@
       });
     }
 
-    const emailField = document.querySelector('[name="email"]');
-    if (emailField) {
-      emailField.addEventListener('input', function () {
-        if (emailField.value.trim() !== '' && !isValidEmail(emailField.value)) {
-          emailField.classList.add('invalid');
-        } else {
-          emailField.classList.remove('invalid');
-        }
-      });
-    }
+    const emailInput = document.getElementById('email');
+    emailInput.addEventListener('blur', validateEmailFormat);
   });
 
   function submitForm(event) {
     event.preventDefault();
-    const emailField = document.querySelector('[name="email"]');
-    const email = emailField.value.trim();
-
-    if (email !== '' && !isValidEmail(email)) {
-      emailField.classList.add('invalid');
-      alert("Please enter a valid email address. It must contain an '@' and a domain like '.com'.");
+    if (!validateEmailFormat()) {
+      alert("Something is wrong with your email address. Please try again.");
       return;
-    } else {
-      emailField.classList.remove('invalid');
     }
 
     const form = document.getElementById("reunionForm");
@@ -240,6 +231,8 @@
 
 </body>
 </html>
+
+
 
 
 
