@@ -213,6 +213,13 @@ function closeLegacyPopup() {
   document.getElementById("overlay").style.display = "none";
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  updateSummary();
+
+  document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
+  document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
+});
+
 function submitForm(event) {
   event.preventDefault();
   updateSummary();
@@ -259,6 +266,7 @@ function submitForm(event) {
 
 </body>
 </html>
+
 
 
 
