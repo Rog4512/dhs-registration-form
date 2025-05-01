@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.2.6 | Date: 2025-04-30 | ERP_2.2.6_2025-04-30 -->
+<!-- Version: 2.3.1 | Date: 2025-05-01 | ERP_2.3.1_2025-05-01 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -53,6 +53,13 @@
       padding: 15px;
       border-radius: 6px;
       display: none;
+    }
+    #standby-message {
+      display: none;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+      text-align: center;
     }
     select {
       width: 80px;
@@ -136,7 +143,10 @@
         </tbody>
       </table>
 
-      <label>Legacy Fund Contribution (optional):</label>
+      <label>
+        Legacy Fund Contribution (optional):
+        <a href="#" onclick="showLegacyPopup()" style="font-size: 0.85em; font-weight: normal; margin-left: 8px;">What’s this?</a>
+      </label>
       <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
 
       <div class="summary-box">
@@ -152,103 +162,104 @@
         <p><strong>Mail your check to:</strong><br>Nancy Broadstone<br>Dyer County Trustee<br>P.O. Box 1360<br>Dyersburg, TN 38025-1360</p>
       </div>
 
-      <button type="submit" class="submit-btn">Submit Registration</button>
+      <button type="submit" class="submit-btn" id="submit-button">Submit Registration</button>
     </form>
+
+    <p id="standby-message">Please stand by while we process your registration...</p>
+
+    <div id="legacyPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; width:80%; max-width:400px; box-shadow: 0 0 10px rgba(0,0,0,0.2); border-radius: 8px;">
+      <h3>Legacy Fund</h3>
+      <p>These funds allow us to quietly assist classmates who wish to attend reunion events but may not be able to afford it. They also help us extend small acts of kindness to classmates who are seriously ill or to honor those who have passed. Your generosity ensures that no classmate is forgotten.</p>
+      <button onclick="closeLegacyPopup()" style="margin-top: 10px;">Close</button>
+    </div>
+    <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:999;"></div>
 
     <div id="thankYouMessage" class="thank-you">
       <h2>Thank You for Registering!</h2>
       <p>Your form was submitted successfully.</p>
       <div id="emailWarning">
-        <p><strong>Heads Up:</strong> It looks like your email may have been entered incorrectly. If you don’t receive your confirmation within 10 minutes, please email <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a> so we can confirm your email address and email them to you, or send your documents by mail if necessary.</p>
+        <p><strong>Heads Up:</strong> It looks like your email may have been entered incorrectly. If you don’t receive your confirmation within 10 minutes, please email <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a>.</p>
       </div>
     </div>
   </div>
 
 <script>
-  function isValidEmail(email) {
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return pattern.test(email);
+function isValidEmail(email) {
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return pattern.test(email);
+}
+
+function updateSummary() {
+  const guestName = document.querySelector('[name="guest_name"]').value.trim();
+  const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
+  const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
+  const attendees = guestName ? 2 : 1;
+  const reunionFee = attendees * feePerPerson;
+  const totalDue = reunionFee + legacyFund;
+
+  document.getElementById('summary-attendees').innerText = attendees;
+  document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
+  document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+  document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+  document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
+}
+
+function showLegacyPopup() {
+  document.getElementById("legacyPopup").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+}
+function closeLegacyPopup() {
+  document.getElementById("legacyPopup").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
+
+function submitForm(event) {
+  event.preventDefault();
+  updateSummary();
+
+  const form = document.getElementById("reunionForm");
+  const emailInput = document.getElementById("email");
+  const emailWarning = document.getElementById("emailWarning");
+  const standbyMessage = document.getElementById("standby-message");
+  const submitButton = document.getElementById("submit-button");
+
+  const formData = new FormData(form);
+  const emailVal = emailInput.value.trim();
+
+  submitButton.disabled = true;
+  submitButton.innerText = "Processing...";
+  standbyMessage.style.display = "block";
+
+  if (!isValidEmail(emailVal)) {
+    emailInput.classList.add("invalid");
+    document.getElementById("emailError").style.display = "block";
+    emailWarning.style.display = "block";
+  } else {
+    emailWarning.style.display = "none";
   }
 
-  function updateSummary() {
-    const guestName = document.querySelector('[name="guest_name"]').value.trim();
-    const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
-    const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
-    const attendees = guestName ? 2 : 1;
-    const reunionFee = attendees * feePerPerson;
-    const totalDue = reunionFee + legacyFund;
-
-    document.getElementById('summary-attendees').innerText = attendees;
-    document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
-    document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
-    document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
-    document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const currentFee = parseFloat(document.getElementById('currentReunionFee').value) || 45;
-    document.querySelector('[name="RegistrationFee"]').value = currentFee;
-    updateSummary();
-
-    document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
-    document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
-
-    const emailInput = document.getElementById("email");
-    const emailError = document.getElementById("emailError");
-    const emailWarning = document.getElementById("emailWarning");
-
-    emailInput.addEventListener("blur", () => {
-      const isValid = isValidEmail(emailInput.value);
-      if (isValid || emailInput.value === '') {
-        emailInput.classList.remove("invalid");
-        emailError.style.display = "none";
-      } else {
-        emailInput.classList.add("invalid");
-        emailError.style.display = "block";
-      }
+  fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
+    method: "POST",
+    body: formData,
+    mode: "no-cors"
+  })
+  .then(() => {
+    let params = new URLSearchParams();
+    formData.forEach((value, key) => {
+      params.append(key, value);
     });
+    window.location.href = "thank-you.html?" + params.toString();
+  })
+  .catch((error) => {
+    alert("Something went wrong. Please try again later.");
+    console.error("Submission error:", error);
   });
-
-  function submitForm(event) {
-    event.preventDefault();
-    updateSummary();
-
-    const form = document.getElementById("reunionForm");
-    const emailInput = document.getElementById("email");
-    const emailWarning = document.getElementById("emailWarning");
-
-    const formData = new FormData(form);
-    const emailVal = emailInput.value.trim();
-
-    if (!isValidEmail(emailVal)) {
-      emailInput.classList.add("invalid");
-      document.getElementById("emailError").style.display = "block";
-      emailWarning.style.display = "block";
-    } else {
-      emailWarning.style.display = "none";
-    }
-
-    fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
-      method: "POST",
-      body: formData,
-      mode: "no-cors"
-    })
-    .then(() => {
-      let params = new URLSearchParams();
-      formData.forEach((value, key) => {
-        params.append(key, value);
-      });
-      window.location.href = "thank-you.html?" + params.toString();
-    })
-    .catch((error) => {
-      alert("Something went wrong. Please try again later.");
-      console.error("Submission error:", error);
-    });
-  }
+}
 </script>
 
 </body>
 </html>
+
 
 
 
