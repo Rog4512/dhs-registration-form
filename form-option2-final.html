@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.5.4 | Date: 2025-05-06 | ERP_2.5.4_2025-05-06 -->
+<!-- Version: 2.5.5 | Date: 2025-05-06 | ERP_2.5.5_2025-05-06 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -131,17 +131,31 @@
       <label>Notes:</label><textarea name="notes" rows="3"></textarea>
 
       <table class="events-table">
-        <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
-        <tbody>
-          <tr><td>Friday Tour</td><td><select name="eventFridayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventFridayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Tailgate Party</td><td><select name="eventTailgateClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventTailgateGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Football Game</td><td><select name="eventGameClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGameGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Tour</td><td><select name="eventSaturdayTourClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventSaturdayTourGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Breakfast</td><td><select name="eventBreakfastClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventBreakfastGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Golf</td><td><select name="eventGolfClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventGolfGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Reunion Dinner</td><td><select name="eventDinnerClassmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="eventDinnerGuest"><option></option><option>Y</option><option>N</option></select></td></tr>
-        </tbody>
-      </table>
+  <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
+  <tbody>
+    <tr><td>Friday Tour</td>
+      <td><select name="friday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="friday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Tailgate Party</td>
+      <td><select name="tailgate_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="tailgate_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Football Game</td>
+      <td><select name="football_game_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="football_game_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Saturday Tour</td>
+      <td><select name="saturday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Saturday Breakfast</td>
+      <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Saturday Golf</td>
+      <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Reunion Dinner</td>
+      <td><select name="reunion_dinner_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="reunion_dinner_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+  </tbody>
+</table>
 
       <label>
         Legacy Fund Contribution (optional):
@@ -248,7 +262,7 @@ function submitForm(event) {
   fetch("https://script.google.com/macros/s/AKfycbxUcYEi4zCIxEcqCd-aG5mrk4hZ7TqIL5kWFHnnd0OvohfYDCZZykczxOESKyOu8g4ydA/exec", {
     method: "POST",
     body: formData,
-    mode: "cors"  // changed from "no-cors" for testing
+    mode: "cors"
   })
   .then(() => {
     let params = new URLSearchParams();
