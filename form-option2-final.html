@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.3.1 | Date: 2025-05-01 | ERP_2.3.1_2025-05-01 -->
+<!-- Version: 2.3.2 | Date: 2025-05-01 | ERP_2.3.1_2025-05-01 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -245,10 +245,10 @@ function submitForm(event) {
     emailWarning.style.display = "none";
   }
 
-  fetch("https://script.google.com/macros/s/AKfycbxfTsbrrPxmM-NmW9ZD6oSkPmCbCwC0Hp21Ga3c5kkONCnjk6L1MSOTcWLtpmYv5oxAfw/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyVDL_TJB3kPcbjDQ2oaLgf-4hbjWVLoEtLgtS9Dw30/dev", {
     method: "POST",
     body: formData,
-    mode: "no-cors"
+    mode: "cors"  // changed from "no-cors" for testing
   })
   .then(() => {
     let params = new URLSearchParams();
