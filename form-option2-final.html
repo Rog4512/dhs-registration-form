@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.5.6 | Date: 2025-05-07 | ERP_2.5.6_2025-05-07 -->
+<!-- Version: 2.5.7 | Date: 2025-05-07 | ERP_2.5.7_2025-05-07 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -133,15 +133,8 @@ function submitForm(event) {
   event.preventDefault();
   updateSummary();
 
-  const formData = new FormData();
-  ["classmate_name", "name_1975", "guest_name", "mailing_address", "email", "phone",
-   "classmate_nametag", "guest_nametag", "notes",
-   "friday_tour_classmate", "friday_tour_guest", "tailgate_classmate", "tailgate_guest",
-   "football_game_classmate", "football_game_guest", "saturday_tour_classmate", "saturday_tour_guest",
-   "saturday_breakfast_classmate", "saturday_breakfast_guest", "saturday_golf_classmate", "saturday_golf_guest",
-   "reunion_dinner_classmate", "reunion_dinner_guest",
-   "RegistrationFee", "legacy_fund", "TotalDue"
-  ].forEach(name => formData.append(name, document.querySelector(`[name="${name}"]`).value));
+  const form = document.getElementById("reunionForm");
+  const formData = new FormData(form);
 
   fetch("https://script.google.com/macros/s/AKfycbxUcYEi4zCIxEcqCd-aG5mrk4hZ7TqIL5kWFHnnd0OvohfYDCZZykczxOESKyOu8g4ydA/exec", {
     method: "POST",
