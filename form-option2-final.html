@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 2.5.7 | Date: 2025-05-07 | ERP_2.5.7_2025-05-07 -->
+<!-- Version: 2.5.8 | Date: 2025-05-07 | ERP_2.5.8_2025-05-07 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -100,6 +100,9 @@
   <div id="thankYouMessage" class="thank-you">
     <h2>Thank You for Registering!</h2>
     <p>Your form was submitted successfully.</p>
+    <div id="emailWarning">
+      <p><strong>Heads Up:</strong> It looks like your email may have been entered incorrectly. If you don’t receive your confirmation within 10 minutes, please email <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a>.</p>
+    </div>
   </div>
 </div>
 
@@ -134,7 +137,25 @@ function submitForm(event) {
   updateSummary();
 
   const form = document.getElementById("reunionForm");
+  const emailInput = document.getElementById("email");
+  const emailWarning = document.getElementById("emailWarning");
+  const standbyMessage = document.getElementById("standby-message");
+  const submitButton = document.getElementById("submit-button");
+
   const formData = new FormData(form);
+  const emailVal = emailInput.value.trim();
+
+  submitButton.disabled = true;
+  submitButton.innerText = "Processing...";
+  standbyMessage.style.display = "block";
+
+  if (!isValidEmail(emailVal)) {
+    emailInput.classList.add("invalid");
+    document.getElementById("emailError").style.display = "block";
+    emailWarning.style.display = "block";
+  } else {
+    emailWarning.style.display = "none";
+  }
 
   fetch("https://script.google.com/macros/s/AKfycbxUcYEi4zCIxEcqCd-aG5mrk4hZ7TqIL5kWFHnnd0OvohfYDCZZykczxOESKyOu8g4ydA/exec", {
     method: "POST",
