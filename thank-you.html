@@ -108,9 +108,6 @@
         ["Event 10 Name", "event10_classmate", "event10_guest"]
       ];
 
-      // Limit visible events to first 7 only
-      const events = allEvents.slice(0, 8);
-
       const eventList = document.getElementById("eventList");
       events.forEach(([label, classmateKey, guestKey]) => {
         const classmateVal = params.get(classmateKey);
