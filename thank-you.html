@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: ERP 2.1.0 - 2025-04-29 -->
+<!-- Version: ERP 2.2.0 - 2025-05-08 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -169,6 +169,20 @@
       }
 
       let eventDetails = '';
+      
+      const eventNames = [
+        ['Friday Tour', 'friday_tour_classmate', 'friday_tour_guest'],
+        ['Tailgate Party', 'tailgate_classmate', 'tailgate_guest'],
+        ['Football Game', 'football_game_classmate', 'football_game_guest'],
+        ['Saturday Tour', 'saturday_tour_classmate', 'saturday_tour_guest'],
+        ['Saturday Breakfast', 'saturday_breakfast_classmate', 'saturday_breakfast_guest'],
+        ['Saturday Golf', 'saturday_golf_classmate', 'saturday_golf_guest'],
+        ['Reunion Dinner', 'reunion_dinner_classmate', 'reunion_dinner_guest'],
+        ['Event 8 Name', 'event8_classmate', 'event8_guest'],
+        ['Event 9 Name', 'event9_classmate', 'event9_guest'],
+        ['Event 10 Name', 'event10_classmate', 'event10_guest']
+      ];
+
       eventNames.forEach(([label, classmateField, guestField]) => {
         const classmateChoice = getParam(classmateField);
         const guestChoice = getParam(guestField);
