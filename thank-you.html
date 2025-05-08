@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: ERP 2.2.2 - 2025-05-08 -->
+<!-- Version: ERP 2.2.3 - 2025-05-08 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -134,7 +134,13 @@
   <script>
     function printArea() {
       const printContents = document.getElementById("printableArea").innerHTML;
-      const newWindow = window.open('', '', 'width=800,height=600');
+      const newWindow = window.open('', '_blank', 'width=800,height=600');
+
+      if (!newWindow) {
+        alert("Popup blocker is preventing the print window from opening. Please allow popups for this site.");
+        return;
+      }
+
       newWindow.document.write(`
         <html>
           <head>
@@ -147,15 +153,12 @@
               .logo-icon { height: 40px; vertical-align: middle; margin-right: 10px; }
             </style>
           </head>
-          <body>
+          <body onload="window.print();">
             ${printContents}
           </body>
         </html>
       `);
       newWindow.document.close();
-      newWindow.focus();
-      newWindow.print();
-      newWindow.close();
     }
 
     const params = new URLSearchParams(window.location.search);
