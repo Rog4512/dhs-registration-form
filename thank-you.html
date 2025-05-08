@@ -60,6 +60,7 @@
       vertical-align: middle;
       margin-right: 10px;
     }
+
     @media print {
       .noprint {
         display: none;
@@ -69,7 +70,8 @@
 </head>
 
 <body>
-  <div class="noprint" style="text-align: center; margin-top: 30px;">
+  <!-- Print Button (not printed) -->
+  <div class="noprint" style="text-align: center; margin-top: 20px;">
     <button type="button" onclick="printArea()" style="
       background-color: #f0f0f0;
       color: #333;
@@ -86,7 +88,7 @@
     </button>
   </div>
 
-  <!-- BEGIN PRINTABLE AREA -->
+  <!-- Start of Printable Content -->
   <div id="printableArea">
     <div class="thank-you-container">
       <h1><img src="trojan99.jpeg" alt="Trojans Logo" class="logo-icon">Thank You for Registering!</h1>
@@ -137,43 +139,10 @@
       <p style="margin-top: 40px;"><em>We can’t wait to see you at the reunion!</em></p>
     </div>
   </div>
-  <!-- END PRINTABLE AREA -->
+  <!-- End of Printable Content -->
 
+  <!-- JavaScript -->
   <script>
-    function printArea() {
-      const printContents = document.getElementById('printableArea').innerHTML;
-      const originalContents = document.body.innerHTML;
-      document.body.innerHTML = printContents;
-      window.print();
-      document.body.innerHTML = originalContents;
-      location.reload();
-    }
-
-    const params = new URLSearchParams(window.location.search);
-    const eventNames = [
-      ['Friday Tour', 'friday_tour_classmate', 'friday_tour_guest'],
-      ['Tailgate Party', 'tailgate_classmate', 'tailgate_guest'],
-      ['Football Game', 'football_game_classmate', 'football_game_guest'],
-      ['Saturday Tour', 'saturday_tour_classmate', 'saturday_tour_guest'],
-      ['Saturday Breakfast', 'saturday_breakfast_classmate', 'saturday_breakfast_guest'],
-      ['Saturday Golf', 'saturday_golf_classmate', 'saturday_golf_guest'],
-      ['Reunion Dinner', 'reunion_dinner_classmate', 'reunion_dinner_guest'],
-      ['Event 8 Name', 'event8_classmate', 'event8_guest'],
-      ['Event 9 Name', 'event9_classmate', 'event9_guest'],
-      ['Event 10 Name', 'event10_classmate', 'event10_guest']
-    ];
-
-    const eventList = document.getElementById("eventList");
-    eventNames.forEach(([label, classmateKey, guestKey]) => {
-      const classmateVal = params.get(classmateKey);
-      const guestVal = params.get(guestKey);
-      if (classmateVal || guestVal) {
-        const li = document.createElement("li");
-        li.textContent = `${label}: ${classmateVal || '-'} (Classmate), ${guestVal || '-'} (Guest)`;
-        eventList.appendChild(li);
-      }
-    });
-
     function getParam(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name) || '';
@@ -185,7 +154,16 @@
       return '';
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
+    function printArea() {
+      const printContents = document.getElementById('printableArea').innerHTML;
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+      location.reload();
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
       const classmateName = getParam('classmate_name');
       const guestName = getParam('guest_name');
       const legacyFund = getParam('legacy_fund') || "0.00";
@@ -202,6 +180,19 @@
       }
 
       let eventDetails = '';
+      const eventNames = [
+        ['Friday Tour', 'friday_tour_classmate', 'friday_tour_guest'],
+        ['Tailgate Party', 'tailgate_classmate', 'tailgate_guest'],
+        ['Football Game', 'football_game_classmate', 'football_game_guest'],
+        ['Saturday Tour', 'saturday_tour_classmate', 'saturday_tour_guest'],
+        ['Saturday Breakfast', 'saturday_breakfast_classmate', 'saturday_breakfast_guest'],
+        ['Saturday Golf', 'saturday_golf_classmate', 'saturday_golf_guest'],
+        ['Reunion Dinner', 'reunion_dinner_classmate', 'reunion_dinner_guest'],
+        ['Event 8 Name', 'event8_classmate', 'event8_guest'],
+        ['Event 9 Name', 'event9_classmate', 'event9_guest'],
+        ['Event 10 Name', 'event10_classmate', 'event10_guest']
+      ];
+
       eventNames.forEach(([label, classmateField, guestField]) => {
         const classmateChoice = getParam(classmateField);
         const guestChoice = getParam(guestField);
