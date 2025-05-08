@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: ERP 2.2.5 - 2025-05-08 -->
+<!-- Version: ERP 2.2.6 - RESET PRINT -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -63,116 +63,56 @@
   </style>
 </head>
 <body>
-  <div style="text-align: center; margin-top: 30px;">
-    <button type="button" onclick="printArea()" style="
-      background-color: #f0f0f0;
-      color: #333;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;">
-      🖨️ Print Confirmation for Your Records
-    </button>
-  </div>
+  <div class="thank-you-container">
+    <h1><img src="trojan99.jpeg" alt="Trojans Logo" class="logo-icon">Thank You for Registering!</h1>
+    <p id="personalMessage"></p>
 
-  <div id="printableArea">
-    <div class="thank-you-container">
-      <h1><img src="trojan99.jpeg" alt="Trojans Logo" class="logo-icon">Thank You for Registering!</h1>
-      <p id="personalMessage"></p>
-
-      <div class="section" id="registrationSummary">
-        <div class="section-title">Registration Summary:</div>
-        <p><strong>Classmate Name:</strong> <span id="classmateName"></span></p>
-        <p id="guestInfo"></p>
-        <div id="eventSummary"></div>
-        <p><strong>Legacy Fund Contribution:</strong> $<span id="legacyFund"></span></p>
-        <p><strong>Total Amount Due:</strong> $<span id="totalDue"></span></p>
-      </div>
-
-      <div class="section" id="emailInstructions">
-        <div class="section-title">Next Steps:</div>
-        <p id="emailMessage"></p>
-        <div id="downloadSection" style="display:none;">
-          <p><strong>Since no email was provided:</strong></p>
-          <p>You may download your registration confirmation and mailing instructions here:</p>
-          <a href="YOUR_DOWNLOAD_LINK_HERE" target="_blank" class="download-link">Download Instructions</a>
-          <p>Or call Roger Walker at (615) 861-0347 to request copies by mail.</p>
-        </div>
-      </div>
-
-      <div class="section" style="margin-bottom: 30px;">
-        <h3>Event Selections:</h3>
-        <ul id="eventList" style="list-style-type: none; padding-left: 0;"></ul>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Mail Your Check To:</div>
-        <p>Nancy Broadstone</p>
-        <p>Dyer County Trustee</p>
-        <p>P.O. Box 1360</p>
-        <p>Dyersburg, TN 38025-1360</p>
-        <p><strong>Don't forget to include the classmate’s name on the memo line of your check!</strong></p>
-      </div>
-
-      <p class="reminder">
-        ✉️ Before you exit this page, please check your email for your official Reunion Registration Confirmation and Agenda.<br>
-        If you don't see it within a few minutes, check your spam/junk folder.<br>
-        Or contact Roger Walker:<br>
-        📧 Email: <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a><br>
-        📞 Phone: (615) 861-0347
-      </p>
-
-      <p style="margin-top: 40px;"><em>We can’t wait to see you at the reunion!</em></p>
+    <div class="section" id="registrationSummary">
+      <div class="section-title">Registration Summary:</div>
+      <p><strong>Classmate Name:</strong> <span id="classmateName"></span></p>
+      <p id="guestInfo"></p>
+      <div id="eventSummary"></div>
+      <p><strong>Legacy Fund Contribution:</strong> $<span id="legacyFund"></span></p>
+      <p><strong>Total Amount Due:</strong> $<span id="totalDue"></span></p>
     </div>
+
+    <div class="section" id="emailInstructions">
+      <div class="section-title">Next Steps:</div>
+      <p id="emailMessage"></p>
+      <div id="downloadSection" style="display:none;">
+        <p><strong>Since no email was provided:</strong></p>
+        <p>You may download your registration confirmation and mailing instructions here:</p>
+        <a href="YOUR_DOWNLOAD_LINK_HERE" target="_blank" class="download-link">Download Instructions</a>
+        <p>Or call Roger Walker at (615) 861-0347 to request copies by mail.</p>
+      </div>
+    </div>
+
+    <div class="section" style="margin-bottom: 30px;">
+      <h3>Event Selections:</h3>
+      <ul id="eventList" style="list-style-type: none; padding-left: 0;"></ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Mail Your Check To:</div>
+      <p>Nancy Broadstone</p>
+      <p>Dyer County Trustee</p>
+      <p>P.O. Box 1360</p>
+      <p>Dyersburg, TN 38025-1360</p>
+      <p><strong>Don't forget to include the classmate’s name on the memo line of your check!</strong></p>
+    </div>
+
+    <p class="reminder">
+      ✉️ Before you exit this page, please check your email for your official Reunion Registration Confirmation and Agenda.<br>
+      If you don't see it within a few minutes, check your spam/junk folder.<br>
+      Or contact Roger Walker:<br>
+      📧 Email: <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a><br>
+      📞 Phone: (615) 861-0347
+    </p>
+
+    <p style="margin-top: 40px;"><em>We can’t wait to see you at the reunion!</em></p>
   </div>
 
   <script>
-    function printArea() {
-      const printContents = document.getElementById("printableArea").innerHTML;
-      const newWindow = window.open('', '_blank', 'width=800,height=600');
-
-      if (!newWindow) {
-        alert("Popup blocker is preventing the print window from opening. Please allow popups for this site.");
-        return;
-      }
-
-      newWindow.document.write(`
-        <html>
-          <head>
-            <title>Print Confirmation</title>
-            <style>
-              body { font-family: Arial, sans-serif; padding: 20px; background: #fff; }
-              h1, h2 { color: black; }
-              p { font-size: 1rem; color: #333; margin: 10px 0; }
-              .section-title { font-weight: bold; margin-bottom: 10px; font-size: 1.1rem; }
-              .logo-icon { height: 40px; vertical-align: middle; margin-right: 10px; }
-              .print-btn {
-                margin-top: 20px;
-                padding: 12px 24px;
-                background: #333;
-                color: white;
-                border: none;
-                border-radius: 6px;
-                font-size: 16px;
-                cursor: pointer;
-              }
-            </style>
-          </head>
-          <body>
-            ${printContents}
-            <div style="text-align:center;">
-              <button class="print-btn" onclick="window.print()">🖨️ Click to Print This Page</button>
-            </div>
-          </body>
-        </html>
-      `);
-      newWindow.document.close();
-    }
-
     const params = new URLSearchParams(window.location.search);
     const eventNames = [
       ['Friday Tour', 'friday_tour_classmate', 'friday_tour_guest'],
@@ -247,6 +187,7 @@
   </script>
 </body>
 </html>
+
 
 
 
