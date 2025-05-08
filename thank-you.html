@@ -171,16 +171,6 @@
         document.getElementById('guestInfo').style.display = 'none';
       }
 
-      const eventNames = [
-        ['Friday Tour', 'eventFridayTourClassmate', 'eventFridayTourGuest'],
-        ['Tailgate Party', 'eventTailgateClassmate', 'eventTailgateGuest'],
-        ['Football Game', 'eventGameClassmate', 'eventGameGuest'],
-        ['Saturday Tour', 'eventSaturdayTourClassmate', 'eventSaturdayTourGuest'],
-        ['Saturday Breakfast', 'eventBreakfastClassmate', 'eventBreakfastGuest'],
-        ['Saturday Golf', 'eventGolfClassmate', 'eventGolfGuest'],
-        ['Reunion Dinner', 'eventDinnerClassmate', 'eventDinnerGuest'],
-      ];
-
       let eventDetails = '';
       eventNames.forEach(([label, classmateField, guestField]) => {
         const classmateChoice = getParam(classmateField);
