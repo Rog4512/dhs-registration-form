@@ -87,6 +87,41 @@
         <p>Or call Roger Walker at (615) 861-0347 to request copies by mail.</p>
       </div>
     </div>
+   
+    <div class="section" id="eventSummary" style="margin-bottom: 30px;">
+      <h3>Event Selections:</h3>
+      <ul id="eventList" style="list-style-type: none; padding-left: 0;"></ul>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const allEvents = [
+        ["Friday Tour", "friday_tour_classmate", "friday_tour_guest"],
+        ["Tailgate Party", "tailgate_classmate", "tailgate_guest"],
+        ["Football Game", "football_game_classmate", "football_game_guest"],
+        ["Saturday Tour", "saturday_tour_classmate", "saturday_tour_guest"],
+        ["Saturday Breakfast", "saturday_breakfast_classmate", "saturday_breakfast_guest"],
+        ["Saturday Golf", "saturday_golf_classmate", "saturday_golf_guest"],
+        ["Reunion Dinner", "reunion_dinner_classmate", "reunion_dinner_guest"]
+        ["Event 8 Name", "event8_classmate", "event8_guest"],
+        ["Event 9 Name", "event9_classmate", "event9_guest"],
+        ["Event 10 Name", "event10_classmate", "event10_guest"]
+      ];
+
+      // Limit visible events to first 7 only
+      const events = allEvents.slice(0, 7);
+
+      const eventList = document.getElementById("eventList");
+      events.forEach(([label, classmateKey, guestKey]) => {
+        const classmateVal = params.get(classmateKey);
+        const guestVal = params.get(guestKey);
+        if (classmateVal || guestVal) {
+          const li = document.createElement("li");
+          li.textContent = `${label}: ${classmateVal || '-'} (Classmate), ${guestVal || '-'} (Guest)`;
+          eventList.appendChild(li);
+        }
+      });
+    </script>
 
     <div class="section">
       <div class="section-title">Mail Your Check To:</div>
