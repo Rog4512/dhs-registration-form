@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: ERP 2.2.3 - 2025-05-08 -->
+<!-- Version: ERP 2.2.4 - 2025-05-08 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -153,8 +153,16 @@
               .logo-icon { height: 40px; vertical-align: middle; margin-right: 10px; }
             </style>
           </head>
-          <body onload="window.print();">
+          <body>
             ${printContents}
+            <script>
+              window.onload = function() {
+                setTimeout(function() {
+                  window.print();
+                  window.close();
+                }, 300);
+              }
+            <\/script>
           </body>
         </html>
       `);
@@ -235,3 +243,5 @@
   </script>
 </body>
 </html>
+
+
