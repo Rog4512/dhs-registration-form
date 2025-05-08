@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: ERP 2.2.4 - 2025-05-08 -->
+<!-- Version: ERP 2.2.5 - 2025-05-08 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -62,7 +62,6 @@
     }
   </style>
 </head>
-
 <body>
   <div style="text-align: center; margin-top: 30px;">
     <button type="button" onclick="printArea()" style="
@@ -151,18 +150,23 @@
               p { font-size: 1rem; color: #333; margin: 10px 0; }
               .section-title { font-weight: bold; margin-bottom: 10px; font-size: 1.1rem; }
               .logo-icon { height: 40px; vertical-align: middle; margin-right: 10px; }
+              .print-btn {
+                margin-top: 20px;
+                padding: 12px 24px;
+                background: #333;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                cursor: pointer;
+              }
             </style>
           </head>
           <body>
             ${printContents}
-            <script>
-              window.onload = function() {
-                setTimeout(function() {
-                  window.print();
-                  window.close();
-                }, 300);
-              }
-            <\/script>
+            <div style="text-align:center;">
+              <button class="print-btn" onclick="window.print()">🖨️ Click to Print This Page</button>
+            </div>
           </body>
         </html>
       `);
@@ -243,5 +247,6 @@
   </script>
 </body>
 </html>
+
 
 
