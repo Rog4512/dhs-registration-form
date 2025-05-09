@@ -254,9 +254,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
 });
 
-function submitForm(event) {
+  function submitForm(event) {
   event.preventDefault();
-  updateSummary();
+  updateSummary(); // ← Yes, run this here
+  console.log("📦 Registration Fee: $" + document.getElementById("currentReunionFee").value);
 
   const form = document.getElementById("reunionForm");
   const emailInput = document.getElementById("email");
