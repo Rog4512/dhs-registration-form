@@ -257,45 +257,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function submitForm(event) {
   event.preventDefault();
   updateSummary(); // ← Yes, run this here
-  console.log("📌 Registration Fee: $" + document.getElementById("currentReunionFee").value);
+  console.log("📦 Registration Fee: $" + document.getElementById("currentReunionFee").value);
 
   const form = document.getElementById("reunionForm");
-  const submitButton = document.getElementById("submit-button");
-  const standbyMessage = document.getElementById("standby-message");
-
-  const formData = new FormData(form);
-  submitButton.disabled = true;
-  submitButton.innerText = "Processing...";
-  standbyMessage.style.display = "block";
-
-  // ✅ Safely include RegistrationFee and TotalDue
-  formData.set("RegistrationFee", document.getElementById("currentReunionFee").value);
-  formData.set("TotalDue", document.getElementById("hiddenTotalDue").value);
-
-  fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_URL/exec", {
-    method: "POST",
-    body: formData,
-    mode: "cors"
-  })
-  .then(() => {
-    let params = new URLSearchParams();
-    formData.forEach((value, key) => {
-      params.append(key, value);
-    });
-    window.location.href = "thank-you.html?" + params.toString();
-  })
-  .catch((error) => {
-    alert("Something went wrong. Please try again later.");
-    console.error("Submission error:", error);
-  });
-}
-
-{  // start of remaining submitForm logic
-
   const emailInput = document.getElementById("email");
   const emailWarning = document.getElementById("emailWarning");
   const standbyMessage = document.getElementById("standby-message");
+  const submitButton = document.getElementById("submit-button");
+
+  const formData = new FormData(form);
   const emailVal = emailInput.value.trim();
+
+  submitButton.disabled = true;
+  submitButton.innerText = "Processing...";
+  standbyMessage.style.display = "block";
 
   if (!isValidEmail(emailVal)) {
     emailInput.classList.add("invalid");
@@ -303,10 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
     emailWarning.style.display = "block";
   } else {
     emailWarning.style.display = "none";
-    document.getElementById("emailError").style.display = "none";
-    emailInput.classList.remove("invalid");
   }
-
   // Explicitly append all form fields to ensure consistent delivery
   formData.append("classmate_name", form.querySelector('[name="classmate_name"]').value);
   formData.append("name_1975", form.querySelector('[name="name_1975"]').value);
@@ -356,7 +328,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
 
 
 
