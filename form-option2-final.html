@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 3.0.1 | Date: 2025-05-13 | ERP_3.0.0_2025-05-06 -->
+<!-- Version: 3.0.0 | Date: 2025-05-08 | ERP_3.0.0_2025-05-06 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -114,7 +114,7 @@
     <h3>Registration Option #2: Register Online, Pay by Check</h3>
 
     <form id="reunionForm" onsubmit="submitForm(event)">
-     upda<input type="hidden" name="RegistrationFee" id="RegistrationFee" value="">
+      <input type="hidden" name="RegistrationFee" value="">
       <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
 
       <label>Classmate Name:</label><input type="text" name="classmate_name" required />
@@ -226,22 +226,16 @@ function isValidEmail(email) {
 function updateSummary() {
   const guestName = document.querySelector('[name="guest_name"]').value.trim();
   const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
-  const feePerPerson = parseFloat(document.getElementById("currentReunionFee").value) || 45;
+  const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
   const attendees = guestName ? 2 : 1;
-  const registrationFee = attendees * feePerPerson;
-  const totalDue = registrationFee + legacyFund;
+  const reunionFee = attendees * feePerPerson;
+  const totalDue = reunionFee + legacyFund;
 
-  // ✅ Set the hidden field with the calculated value
-  document.getElementById("RegistrationFee").value = registrationFee.toFixed(2);
-
-  // ✅ Set total due for submission
-  document.getElementById("hiddenTotalDue").value = totalDue.toFixed(2);
-
-  // ✅ Update visual summary
   document.getElementById('summary-attendees').innerText = attendees;
-  document.getElementById('summary-cost').innerText = `$${registrationFee.toFixed(2)}`;
+  document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
   document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
   document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+  document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
 }
 
 function showLegacyPopup() {
@@ -270,7 +264,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailWarning = document.getElementById("emailWarning");
   const standbyMessage = document.getElementById("standby-message");
   const submitButton = document.getElementById("submit-button");
-const emailVal = emailInput.value.trim();
+
+  const formData = new FormData(form);
+  const emailVal = emailInput.value.trim();
 
   submitButton.disabled = true;
   submitButton.innerText = "Processing...";
@@ -310,14 +306,6 @@ const emailVal = emailInput.value.trim();
   formData.append("RegistrationFee", form.querySelector('[name="RegistrationFee"]').value);
   formData.append("legacy_fund", form.querySelector('[name="legacy_fund"]').value);
   formData.append("TotalDue", form.querySelector('[name="TotalDue"]').value);
-
-const formData = new FormData(form);
-
-// ✅ Manually append RegistrationFee to ensure it is sent
-formData.append("RegistrationFee", document.getElementById("RegistrationFee").value);
-
-// ✅ Optional: Console log for debugging
-console.log("📦 Appended RegistrationFee: $" + document.getElementById("RegistrationFee").value);
 
   fetch("https://script.google.com/macros/s/AKfycbxUcYEi4zCIxEcqCd-aG5mrk4hZ7TqIL5kWFHnnd0OvohfYDCZZykczxOESKyOu8g4ydA/exec", {
     method: "POST",
