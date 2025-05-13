@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+//form-option3-final.html
+<!-- Version: 3.1.2 | Date: 2025-05-13 | ERP_3.0.0_2025-05-06 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DHS Class of 1975 - 50-Year Reunion Registration (Option 2)</title>
+  <style>
+      input,select,textarea {font-size: 16px;}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .form-container {
+      background: #f0f0f0;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 8px;
+    }
+    h1, h2, h3 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="number"], textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input.invalid {
+      background-color: #fff8dc;
+      border: 2px solid #ffcc00;
+    }
+    #emailError {
+      color: #cc9900;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: none;
+    }
+    #emailWarning {
+      margin-top: 20px;
+      font-size: 0.95em;
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 6px;
+      display: none;
+    }
+    #standby-message {
+      display: none;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+      text-align: center;
+    }
+    select {
+      width: 80px;
+    }
+    .events-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    .events-table th, .events-table td {
+      padding: 10px;
+      text-align: center;
+    }
+    .events-table th {
+      background-color: #e0e0e0;
+    }
+    .events-table td {
+      background-color: #ffffff;
+    }
+    .submit-btn {
+      margin-top: 30px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .summary-box, .mail-section, .thank-you {
+      background: #e8f0fe;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .thank-you {
+      display: none;
+      background-color: #dff0d8;
+      color: #3c763d;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <input type="hidden" id="currentReunionFee" value="45">
+    <h1>DHS Class of 1975</h1>
+    <h2>50-Year Reunion Registration</h2>
+    <h3>Registration Option #2: Register Online, Pay by Check</h3>
+
+    <form id="reunionForm" onsubmit="submitForm(event)">
+      <input type="hidden" name="RegistrationFee" value="">
+      <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
+
+      <label>Classmate Name:</label><input type="text" name="classmate_name" required />
+      <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
+      <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
+      <label>Mailing Address:</label><input type="text" name="mailing_address" />
+      <label>Email Address:<br><span style="font-weight: normal; font-size: 0.9em;">Please enter a valid email address that you check often. This is how we will send you important reunion updates and confirmations. Don’t forget to check your spam folder if you don’t see anything from us!</span></label>
+      <input type="text" name="email" id="email" placeholder="example@gmail.com" />
+      <div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
+
+      <label>Phone:</label><input type="text" name="phone" />
+      <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
+      <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
+      <label>Notes:</label><textarea name="notes" rows="3"></textarea>
+
+      <table class="events-table">
+  <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
+  <tbody>
+    <tr><td>Friday Tour</td>
+      <td><select name="friday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="friday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Tailgate Party</td>
+      <td><select name="tailgate_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="tailgate_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Football Game</td>
+      <td><select name="football_game_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="football_game_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Saturday Tour</td>
+      <td><select name="saturday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Saturday Breakfast</td>
+      <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    //Golf notes
+    <tr><td>Saturday Golf</td>
+      <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr>
+      <td colspan="3" style="color: red; font-style: italic; padding-top: 4px;">
+      * The course does not offer club rentals and does not allow sharing. The clubhouse suggests www.shipsticks.com if you need to ship your clubs.
+      </td>
+    </tr>   
+       <div style="margin-left: 25px; color: #b30000; font-size: 0.9em; font-style: italic;">
+</div>
+    <tr><td>Reunion Dinner</td>
+      <td><select name="reunion_dinner_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="reunion_dinner_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+  </tbody>
+</table>
+
+      <label>
+        Legacy Fund Contribution (optional):
+        <a href="#" onclick="showLegacyPopup()" style="font-size: 0.85em; font-weight: normal; margin-left: 8px;">What’s this?</a>
+      </label>
+      <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
+
+      <div class="summary-box">
+        <h4>Registration Summary</h4>
+        <p><strong>Attendees:</strong> <span id="summary-attendees"></span></p>
+        <p><strong>Reunion Fee:</strong> <span id="summary-cost"></span></p>
+        <p><strong>Legacy Fund Contribution:</strong> <span id="summary-legacy"></span></p>
+        <p><strong>Total Amount Due:</strong> <span id="summary-total"></span></p>
+      </div>
+
+      <div class="mail-section">
+        <p><strong>Please note the classmate's name in the check memo line (if it's not obvious from the check).</strong></p>
+        <p><strong>Mail your check to:</strong><br>Nancy Broadstone<br>Dyer County Trustee<br>P.O. Box 1360<br>Dyersburg, TN 38025-1360</p>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-button">Submit Registration</button>
+    </form>
+
+    <p id="standby-message">Please stand by while we process your registration...</p>
+
+    <div id="legacyPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; width:80%; max-width:400px; box-shadow: 0 0 10px rgba(0,0,0,0.2); border-radius: 8px;">
+      <h3>Legacy Fund</h3>
+      <p>These funds allow us to quietly assist classmates who wish to attend reunion events but may not be able to afford it. They also help us extend small acts of kindness to classmates who are seriously ill or to honor those who have passed. Your generosity ensures that no classmate is forgotten.</p>
+      <button onclick="closeLegacyPopup()" style="margin-top: 10px;">Close</button>
+    </div>
+    <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:999;"></div>
+
+    <div id="thankYouMessage" class="thank-you">
+      <h2>Thank You for Registering!</h2>
+      <p>Your form was submitted successfully.</p>
+      <div id="emailWarning">
+        <p><strong>Heads Up:</strong> It looks like your email may have been entered incorrectly. If you don’t receive your confirmation within 10 minutes, please email <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a>.</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+function isValidEmail(email) {
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return pattern.test(email);
+}
+
+function updateSummary() {
+  const guestName = document.querySelector('[name="guest_name"]').value.trim();
+  const legacyFund = parseFloat(document.querySelector('[name="legacy_fund"]').value) || 0;
+  const feePerPerson = parseFloat(document.querySelector('[name="RegistrationFee"]').value) || 45;
+  const attendees = guestName ? 2 : 1;
+  const reunionFee = attendees * feePerPerson;
+  const totalDue = reunionFee + legacyFund;
+
+  document.getElementById('summary-attendees').innerText = attendees;
+  document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
+  document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+  document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+  document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
+}
+
+function showLegacyPopup() {
+  document.getElementById("legacyPopup").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+}
+function closeLegacyPopup() {
+  document.getElementById("legacyPopup").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateSummary();
+
+  document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
+  document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
+});
+
+function submitForm(event) {
+  event.preventDefault();
+  updateSummary();
+
+  const form = document.getElementById("reunionForm");
+  const emailInput = document.getElementById("email");
+  const emailWarning = document.getElementById("emailWarning");
+  const standbyMessage = document.getElementById("standby-message");
+  const submitButton = document.getElementById("submit-button");
+
+  const formData = new FormData(form);
+  const emailVal = emailInput.value.trim();
+
+  submitButton.disabled = true;
+  submitButton.innerText = "Processing...";
+  standbyMessage.style.display = "block";
+
+  if (!isValidEmail(emailVal)) {
+    emailInput.classList.add("invalid");
+    document.getElementById("emailError").style.display = "block";
+    emailWarning.style.display = "block";
+  } else {
+    emailWarning.style.display = "none";
+  }
+  // Explicitly append all form fields to ensure consistent delivery
+  formData.append("classmate_name", form.querySelector('[name="classmate_name"]').value);
+  formData.append("name_1975", form.querySelector('[name="name_1975"]').value);
+  formData.append("guest_name", form.querySelector('[name="guest_name"]').value);
+  formData.append("mailing_address", form.querySelector('[name="mailing_address"]').value);
+  formData.append("email", emailVal);
+  formData.append("phone", form.querySelector('[name="phone"]').value);
+  formData.append("classmate_nametag", form.querySelector('[name="classmate_nametag"]').value);
+  formData.append("guest_nametag", form.querySelector('[name="guest_nametag"]').value);
+  formData.append("notes", form.querySelector('[name="notes"]').value);
+  formData.append("friday_tour_classmate", form.querySelector('[name="friday_tour_classmate"]').value);
+  formData.append("friday_tour_guest", form.querySelector('[name="friday_tour_guest"]').value);
+  formData.append("tailgate_classmate", form.querySelector('[name="tailgate_classmate"]').value);
+  formData.append("tailgate_guest", form.querySelector('[name="tailgate_guest"]').value);
+  formData.append("football_game_classmate", form.querySelector('[name="football_game_classmate"]').value);
+  formData.append("football_game_guest", form.querySelector('[name="football_game_guest"]').value);
+  formData.append("saturday_tour_classmate", form.querySelector('[name="saturday_tour_classmate"]').value);
+  formData.append("saturday_tour_guest", form.querySelector('[name="saturday_tour_guest"]').value);
+  formData.append("saturday_breakfast_classmate", form.querySelector('[name="saturday_breakfast_classmate"]').value);
+  formData.append("saturday_breakfast_guest", form.querySelector('[name="saturday_breakfast_guest"]').value);
+  formData.append("saturday_golf_classmate", form.querySelector('[name="saturday_golf_classmate"]').value);
+  formData.append("saturday_golf_guest", form.querySelector('[name="saturday_golf_guest"]').value);
+  formData.append("reunion_dinner_classmate", form.querySelector('[name="reunion_dinner_classmate"]').value);
+  formData.append("reunion_dinner_guest", form.querySelector('[name="reunion_dinner_guest"]').value);
+  formData.append("RegistrationFee", form.querySelector('[name="RegistrationFee"]').value);
+  formData.append("legacy_fund", form.querySelector('[name="legacy_fund"]').value);
+  formData.append("TotalDue", form.querySelector('[name="TotalDue"]').value);
+
+  fetch("https://script.google.com/macros/s/AKfycbxUcYEi4zCIxEcqCd-aG5mrk4hZ7TqIL5kWFHnnd0OvohfYDCZZykczxOESKyOu8g4ydA/exec", {
+    method: "POST",
+    body: formData,
+    mode: "cors"
+  })
+  .then(() => {
+    let params = new URLSearchParams();
+    formData.forEach((value, key) => {
+      params.append(key, value);
+    });
+    window.location.href = "thank-you.html?" + params.toString();
+  })
+  .catch((error) => {
+    alert("Something went wrong. Please try again later.");
+    console.error("Submission error:", error);
+  });
+}
+</script>
+
+</body>
+</html>
