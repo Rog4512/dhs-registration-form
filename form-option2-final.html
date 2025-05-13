@@ -1,5 +1,7 @@
+Backup form-option2=final.html 2.5.9 2025/05/07
+
 <!DOCTYPE html>
-<!-- Version: 3.0.0 | Date: 2025-05-08 | ERP_3.0.0_2025-05-06 -->
+<!-- Version: 2.5.9 | Date: 2025-05-06 | ERP_3.0.0_2025-05-06 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -150,33 +152,16 @@
       <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
     <tr><td>Saturday Golf</td>
       <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td>
-    </tr>
-    <tr>
-      <td colspan="3" style="text-align:left; padding-left:25px; color:#b30000; font-size:0.9em; font-style:italic;">
-      * Please make arrangements for golf clubs in advance. Club rentals are not available at the course.
-      </td>
-    </tr>
-      <tr><td>Reunion Dinner</td>
+      <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <div style="margin-left: 25px; color: #b30000; font-size: 0.9em; font-style: italic;">
+  * Please make arrangements for golf clubs in advance. Club rentals are not available at the course, but you may be able to borrow or share with a local player.
+</div>
+    <tr><td>Reunion Dinner</td>
       <td><select name="reunion_dinner_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="reunion_dinner_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr style="display:none;">
-      <td>Event 8 Name</td>
-      <td><select name="event8_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="event8_guest"><option></option><option>Y</option><option>N</option></select></td>
-    </tr>
-    <tr style="display:none;">
-      <td>Event 9 Name</td>
-      <td><select name="event9_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="event9_guest"><option></option><option>Y</option><option>N</option></select></td>
-    </tr>
-    <tr style="display:none;">
-      <td>Event 10 Name</td>
-      <td><select name="event10_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="event10_guest"><option></option><option>Y</option><option>N</option></select></td>
-    </tr>
   </tbody>
 </table>
+
       <label>
         Legacy Fund Contribution (optional):
         <a href="#" onclick="showLegacyPopup()" style="font-size: 0.85em; font-weight: normal; margin-left: 8px;">What’s this?</a>
@@ -254,10 +239,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
 });
 
-  function submitForm(event) {
+function submitForm(event) {
   event.preventDefault();
-  updateSummary(); // ← Yes, run this here
-  console.log("📦 Registration Fee: $" + document.getElementById("currentReunionFee").value);
+  updateSummary();
 
   const form = document.getElementById("reunionForm");
   const emailInput = document.getElementById("email");
