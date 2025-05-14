@@ -181,11 +181,15 @@
         <p><strong>Legacy Fund Contribution:</strong> <span id="summary-legacy"></span></p>
         <p><strong>Total Amount Due:</strong> <span id="summary-total"></span></p>
       </div>
-
-      <div class="mail-section">
-        <p><strong>Please note the classmate's name in the check memo line (if it's not obvious from the check).</strong></p>
-        <p><strong>Mail your check to:</strong><br>Nancy Broadstone<br>Dyer County Trustee<br>P.O. Box 1360<br>Dyersburg, TN 38025-1360</p>
-      </div>
+      
+      <p><strong>Payment Method:</strong> Credit/Debit Card via Stripe</p>
+      <p>Please click below to submit your registration. A secure credit/debit card payment screen will follow.</p>
+      <a href="${stripeLink}" target="_blank" style="background: #6772e5; color: white; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-size: 16px;">
+        💳 Pay Now with Card via Stripe
+      </a>
+      <p style="margin-top: 20px; font-size: 0.9em; color: #555;">
+        A receipt will be emailed to you by Stripe after payment is completed.
+      </p>
 
       <button type="submit" class="submit-btn" id="submit-button">Submit Registration</button>
     </form>
