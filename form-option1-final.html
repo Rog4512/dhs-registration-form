@@ -150,7 +150,6 @@
     <tr><td>Saturday Breakfast</td>
       <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    //Golf notes
     <tr><td>Saturday Golf</td>
       <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
@@ -171,7 +170,7 @@
         Legacy Fund Contribution (optional):
         <a href="#" onclick="showLegacyPopup()" style="font-size: 0.85em; font-weight: normal; margin-left: 8px;">What’s this?</a>
       </label>
-      <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
+      <input type="text" name="legacy_fund" id="legacy_fund" placeholder="$0.00" />
 
       <div class="summary-box">
         <h4>Registration Summary</h4>
@@ -180,16 +179,7 @@
         <p><strong>Legacy Fund Contribution:</strong> <span id="summary-legacy"></span></p>
         <p><strong>Total Amount Due:</strong> <span id="summary-total"></span></p>
       </div>
-      
-      <p><strong>Payment Method:</strong> Credit/Debit Card via Stripe</p>
-      <p>Please click below to submit your registration. A secure credit/debit card payment screen will follow.</p>
-      <a href="${stripeLink}" target="_blank" style="background: #6772e5; color: white; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-size: 16px;">
-        💳 Pay Now with Card via Stripe
-      </a>
-      <p style="margin-top: 20px; font-size: 0.9em; color: #555;">
-        A receipt will be emailed to you by Stripe after payment is completed.
-      </p>
-
+     
       <button type="submit" class="submit-btn" id="submit-button">Submit Registration</button>
     </form>
 
@@ -317,6 +307,33 @@ function submitForm(event) {
     console.error("Submission error:", error);
   });
 }
+
+ <script>
+  const legacyInput = document.getElementById("legacy_fund");
+
+  legacyInput.addEventListener("input", (e) => {
+    let raw = e.target.value.replace(/[^\d]/g, "");
+    if (!raw) {
+      e.target.value = "";
+      return;
+    }
+
+    const formatted = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+    }).format(raw / 100);
+
+    e.target.value = formatted;
+  });
+
+  // Ensure value gets parsed properly before submission
+  document.getElementById("registration-form").addEventListener("submit", (e) => {
+    const val = legacyInput.value.replace(/[^0-9.]/g, "");
+    legacyInput.value = parseFloat(val || "0");
+  });
+</script>
+  
 </script>
 
 </body>
