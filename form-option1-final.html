@@ -144,12 +144,12 @@
     <tr><td>Football Game</td>
       <td><select name="football_game_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="football_game_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Saturday Breakfast</td>
+      <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>  
     <tr><td>Saturday Tour</td>
       <td><select name="saturday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr><td>Saturday Breakfast</td>
-      <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
     <tr><td>Saturday Golf</td>
       <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
@@ -278,10 +278,10 @@ function submitForm(event) {
   formData.append("tailgate_guest", form.querySelector('[name="tailgate_guest"]').value);
   formData.append("football_game_classmate", form.querySelector('[name="football_game_classmate"]').value);
   formData.append("football_game_guest", form.querySelector('[name="football_game_guest"]').value);
-  formData.append("saturday_tour_classmate", form.querySelector('[name="saturday_tour_classmate"]').value);
-  formData.append("saturday_tour_guest", form.querySelector('[name="saturday_tour_guest"]').value);
   formData.append("saturday_breakfast_classmate", form.querySelector('[name="saturday_breakfast_classmate"]').value);
   formData.append("saturday_breakfast_guest", form.querySelector('[name="saturday_breakfast_guest"]').value);
+  formData.append("saturday_tour_classmate", form.querySelector('[name="saturday_tour_classmate"]').value);
+  formData.append("saturday_tour_guest", form.querySelector('[name="saturday_tour_guest"]').value);
   formData.append("saturday_golf_classmate", form.querySelector('[name="saturday_golf_classmate"]').value);
   formData.append("saturday_golf_guest", form.querySelector('[name="saturday_golf_guest"]').value);
   formData.append("reunion_dinner_classmate", form.querySelector('[name="reunion_dinner_classmate"]').value);
