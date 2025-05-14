@@ -216,9 +216,9 @@ function updateSummary() {
   const totalDue = reunionFee + legacyFund;
 
   document.getElementById('summary-attendees').innerText = attendees;
-  document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
-  document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
-  document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
+  document.getElementById('summary-registration').innerText = reunionFee.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  document.getElementById('summary-legacy').innerText = legacyFund.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  document.getElementById('summary-total').innerText = totalDue.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
 }
 
