@@ -221,6 +221,14 @@ function updateSummary() {
   document.getElementById('summary-total').innerText = totalDue.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
 }
+// 🔁 Attach updateSummary to change events
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll('input, select');
+  inputs.forEach(input => {
+    input.addEventListener('change', updateSummary);
+    input.addEventListener('input', updateSummary);
+  });
+});
 
 function showLegacyPopup() {
   document.getElementById("legacyPopup").style.display = "block";
