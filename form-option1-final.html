@@ -142,12 +142,12 @@
     <tr><td>Football Game</td>
       <td><select name="football_game_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="football_game_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr><td>Saturday Tour</td>
-      <td><select name="saturday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
     <tr><td>Saturday Breakfast</td>
       <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
+    <tr><td>Saturday Tour</td>
+      <td><select name="saturday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
+      <td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
     <tr><td>Saturday Golf</td>
       <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
@@ -311,8 +311,10 @@ function submitForm(event) {
 const legacyInput = document.getElementById("legacy_fund");
 
 legacyInput.addEventListener("input", (e) => {
-  let raw = e.target.value.replace(/[^\d]/g, "");
-  if (!raw) {
+  let raw = e.target.value.replace(/[^0-9.]/g, ""); // Allow digits and decimal
+  let dollars = parseFloat(raw);
+
+  if (isNaN(dollars) || dollars === 0) {
     e.target.value = "";
     return;
   }
@@ -321,11 +323,11 @@ legacyInput.addEventListener("input", (e) => {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
-  }).format(raw / 100);
+  }).format(dollars);
 
   e.target.value = formatted;
 });
-
+  
 // Ensure value gets parsed properly before submission
 document.getElementById("reunionForm").addEventListener("submit", (e) => {
   const val = legacyInput.value.replace(/[^0-9.]/g, "");
