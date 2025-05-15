@@ -302,6 +302,7 @@ function submitForm(event) {
       params.append(key, value);
     });
     window.location.href = "thank-you.html?" + params.toString();
+
   })
   .catch((error) => {
     alert("Something went wrong. Please try again later.");
@@ -309,32 +310,30 @@ function submitForm(event) {
   });
 }
 
- <script>
-  const legacyInput = document.getElementById("legacy_fund");
+// Format legacy input field
+const legacyInput = document.getElementById("legacy_fund");
 
-  legacyInput.addEventListener("input", (e) => {
-    let raw = e.target.value.replace(/[^\d]/g, "");
-    if (!raw) {
-      e.target.value = "";
-      return;
-    }
+legacyInput.addEventListener("input", (e) => {
+  let raw = e.target.value.replace(/[^\d]/g, "");
+  if (!raw) {
+    e.target.value = "";
+    return;
+  }
 
-    const formatted = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    }).format(raw / 100);
+  const formatted = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(raw / 100);
 
-    e.target.value = formatted;
-  });
+  e.target.value = formatted;
+});
 
-  // Ensure value gets parsed properly before submission
-  document.getElementById("registration-form").addEventListener("submit", (e) => {
-    const val = legacyInput.value.replace(/[^0-9.]/g, "");
-    legacyInput.value = parseFloat(val || "0");
-  });
-</script>
-  
+// Ensure value gets parsed properly before submission
+document.getElementById("reunionForm").addEventListener("submit", (e) => {
+  const val = legacyInput.value.replace(/[^0-9.]/g, "");
+  legacyInput.value = parseFloat(val || "0");
+});
 </script>
 
 </body>
