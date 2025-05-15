@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- form-option1-final.html -->
-<!-- Version: 3.1.3 | Date: 2025-05-14 | ERP_3.0.0_2025-05-06 -->
-<ERP 11: Pre-Stripe Backup — Missing Registration Fee in Confirmation>
+<!-- Version: 3.2.0 | Date: 2025-05-14 | ERP_3.0.0_2025-05-06 -->
+<!-- Restored version before Registration Fee calculation and Legacy Fund contribution $0,000.00 formatting>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -217,19 +217,11 @@ function updateSummary() {
   const totalDue = reunionFee + legacyFund;
 
   document.getElementById('summary-attendees').innerText = attendees;
-  document.getElementById('summary-registration').innerText = reunionFee.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-  document.getElementById('summary-legacy').innerText = legacyFund.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-  document.getElementById('summary-total').innerText = totalDue.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  document.getElementById('summary-cost').innerText = `$${reunionFee.toFixed(2)}`;
+  document.getElementById('summary-legacy').innerText = `$${legacyFund.toFixed(2)}`;
+  document.getElementById('summary-total').innerText = `$${totalDue.toFixed(2)}`;
   document.getElementById('hiddenTotalDue').value = totalDue.toFixed(2);
 }
-// 🔁 Attach updateSummary to change events
-document.addEventListener("DOMContentLoaded", () => {
-  const inputs = document.querySelectorAll('input, select');
-  inputs.forEach(input => {
-    input.addEventListener('change', updateSummary);
-    input.addEventListener('input', updateSummary);
-  });
-});
 
 function showLegacyPopup() {
   document.getElementById("legacyPopup").style.display = "block";
