@@ -305,28 +305,30 @@ function submitForm(event) {
     alert("Something went wrong. Please try again later.");
     console.error("Submission error:", error);
   });
-}
-
-// Format legacy input field
-const legacyInput = document.getElementById("legacy_fund");
-
-legacyInput.addEventListener("input", (e) => {
-  let raw = e.target.value.replace(/[^0-9.]/g, ""); // Allow digits and decimal
-  let dollars = parseFloat(raw);
-
-  if (isNaN(dollars) || dollars === 0) {
-    e.target.value = "";
-    return;
   }
-
-  const formatted = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  }).format(dollars);
-
-  e.target.value = formatted;
-});
+  
+  // Format legacy input field
+  const legacyInput = document.getElementById("legacy_fund");
+  
+  legacyInput.addEventListener("input", (e) => {
+    let raw = e.target.value.replace(/[^0-9.]/g, ""); // Allow digits and decimal
+    let dollars = parseFloat(raw);
+  
+    if (isNaN(dollars) || dollars === 0) {
+      e.target.value = "";
+      updateSummary(); // Ensure summary resets to $0.00
+      return;
+    }
+  
+    const formatted = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+    }).format(dollars);
+  
+    e.target.value = formatted;
+    updateSummary(); // Update summary after formatting
+  });
   
 // Ensure value gets parsed properly before submission
 document.getElementById("reunionForm").addEventListener("submit", (e) => {
