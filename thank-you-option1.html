@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!-- Version: ERP 2.2.6 - RESET PRINT -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You for Registering!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .thank-you-container {
+      background: #f0f0f0;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      margin-top: 30px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: black;
+    }
+    p {
+      font-size: 1rem;
+      color: #333;
+      margin: 10px 0;
+    }
+    .section {
+      margin-top: 30px;
+      text-align: left;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .download-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: black;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .reminder {
+      margin-top: 30px;
+      font-style: italic;
+      color: #555;
+      font-size: 0.95rem;
+    }
+    .logo-icon {
+      height: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-container">
+    <h1><img src="trojan99.jpeg" alt="Trojans Logo" class="logo-icon">Thank You for Registering!</h1>
+    <p id="personalMessage"></p>
+
+    <div class="section" id="registrationSummary">
+      <div class="section-title">Registration Summary:</div>
+      <p><strong>Classmate Name:</strong> <span id="classmateName"></span></p>
+      <p id="guestInfo"></p>
+      <div id="eventSummary"></div>
+      <p><strong>Legacy Fund Contribution:</strong> $<span id="legacyFund"></span></p>
+      <p><strong>Total Amount Due:</strong> $<span id="totalDue"></span></p>
+    </div>
+
+    <div class="section" id="emailInstructions">
+      <div class="section-title">Next Steps:</div>
+      <p id="emailMessage"></p>
+      <div id="downloadSection" style="display:none;">
+        <p><strong>Since no email was provided:</strong></p>
+        <p>You may download your registration confirmation and mailing instructions here:</p>
+        <a href="YOUR_DOWNLOAD_LINK_HERE" target="_blank" class="download-link">Download Instructions</a>
+        <p>Or call Roger Walker at (615) 861-0347 to request copies by mail.</p>
+      </div>
+    </div>
+
+    <div class="section" style="margin-bottom: 30px;">
+      <h3>Event Selections:</h3>
+      <ul id="eventList" style="list-style-type: none; padding-left: 0;"></ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Mail Your Check To:</div>
+      <p>Nancy Broadstone</p>
+      <p>Dyer County Trustee</p>
+      <p>P.O. Box 1360</p>
+      <p>Dyersburg, TN 38025-1360</p>
+      <p><strong>Don't forget to include the classmate’s name on the memo line of your check!</strong></p>
+    </div>
+
+    <p class="reminder">
+      ✉️ Before you exit this page, please check your email for your official Reunion Registration Confirmation and Agenda.<br>
+      If you don't see it within a few minutes, check your spam/junk folder.<br>
+      Or contact Roger Walker:<br>
+      📧 Email: <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a><br>
+      📞 Phone: (615) 861-0347
+    </p>
+
+    <p style="margin-top: 40px;"><em>We can’t wait to see you at the reunion!</em></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const eventNames = [
+      ['Friday Tour', 'friday_tour_classmate', 'friday_tour_guest'],
+      ['Tailgate Party', 'tailgate_classmate', 'tailgate_guest'],
+      ['Football Game', 'football_game_classmate', 'football_game_guest'],
+      ['Saturday Tour', 'saturday_tour_classmate', 'saturday_tour_guest'],
+      ['Saturday Breakfast', 'saturday_breakfast_classmate', 'saturday_breakfast_guest'],
+      ['Saturday Golf', 'saturday_golf_classmate', 'saturday_golf_guest'],
+      ['Reunion Dinner', 'reunion_dinner_classmate', 'reunion_dinner_guest'],
+      ['Event 8 Name', 'event8_classmate', 'event8_guest'],
+      ['Event 9 Name', 'event9_classmate', 'event9_guest'],
+      ['Event 10 Name', 'event10_classmate', 'event10_guest']
+    ];
+
+    const eventList = document.getElementById("eventList");
+    eventNames.forEach(([label, classmateKey, guestKey]) => {
+      const classmateVal = params.get(classmateKey);
+      const guestVal = params.get(guestKey);
+      if (classmateVal || guestVal) {
+        const li = document.createElement("li");
+        li.textContent = `${label}: ${classmateVal || '-'} (Classmate), ${guestVal || '-'} (Guest)`;
+        eventList.appendChild(li);
+      }
+    });
+
+    function getParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name) || '';
+    }
+
+    function formatEvent(name, value) {
+      if (value === 'Y') return `<p><strong>${name}:</strong> Yes</p>`;
+      if (value === 'N') return `<p><strong>${name}:</strong> No</p>`;
+      return '';
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const classmateName = getParam('classmate_name');
+      const guestName = getParam('guest_name');
+      const legacyFund = getParam('legacy_fund') || "0.00";
+      const totalDue = getParam('TotalDue') || "0.00";
+      const email = getParam('email');
+
+      document.getElementById('personalMessage').innerText = `Thank you, ${classmateName}, for completing your reunion registration!`;
+      document.getElementById('classmateName').innerText = classmateName;
+
+      if (guestName.trim() !== '') {
+        document.getElementById('guestInfo').innerHTML = `<strong>Guest Name:</strong> ${guestName}`;
+      } else {
+        document.getElementById('guestInfo').style.display = 'none';
+      }
+
+      let eventDetails = '';
+      eventNames.forEach(([label, classmateField, guestField]) => {
+        const classmateChoice = getParam(classmateField);
+        const guestChoice = getParam(guestField);
+        if (classmateChoice) eventDetails += formatEvent(`${label} (Classmate)`, classmateChoice);
+        if (guestChoice) eventDetails += formatEvent(`${label} (Guest)`, guestChoice);
+      });
+      document.getElementById('eventSummary').innerHTML = eventDetails;
+
+      document.getElementById('legacyFund').innerText = parseFloat(legacyFund).toFixed(2);
+      document.getElementById('totalDue').innerText = parseFloat(totalDue).toFixed(2);
+
+      if (email.trim() !== '') {
+        document.getElementById('emailMessage').innerText = "You will receive a confirmation email with your registration summary and mailing instructions shortly.";
+      } else {
+        document.getElementById('emailInstructions').style.display = "block";
+        document.getElementById('downloadSection').style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
