@@ -241,13 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function submitForm(event) {
   event.preventDefault();
 
-  // Sanitize Legacy Fund value for summary display
-  const legacyRaw = form.querySelector('[name="legacy_fund"]').value.replace(/[^0-9.]/g, "");
-  const legacyDollars = parseFloat(legacyRaw) || 0;
-  document.querySelector('#summary-legacy').innerText = `$${legacyDollars.toFixed(2)}`;
-
-  updateSummary();
-
   const form = document.getElementById("reunionForm");
   const emailInput = document.getElementById("email");
   const emailWarning = document.getElementById("emailWarning");
@@ -256,6 +249,11 @@ function submitForm(event) {
 
   const formData = new FormData(form);
   const emailVal = emailInput.value.trim();
+
+  const legacyRaw = form.querySelector('[name="legacy_fund"]').value.replace(/[^0-9.]/g, "");
+  const legacyDollars = parseFloat(legacyRaw) || 0;
+  document.querySelector('#summary-legacy').innerText = `$${legacyDollars.toFixed(2)}`;
+  updateSummary();
 
   submitButton.disabled = true;
   submitButton.innerText = "Processing...";
