@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- form-option1-final.html -->
-<!-- Version: 3.2.2 | Date: 2025-05-15 | Final live version with all test mode scripts removed -->
+<!-- Version: 3.2.3 | Date: 2025-05-15 | Final live version with all test mode scripts removed -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -262,12 +262,14 @@ function submitForm(event) {
   standbyMessage.style.display = "block";
 
   if (!isValidEmail(emailVal)) {
-    emailInput.classList.add("invalid");
-    document.getElementById("emailError").style.display = "block";
-    emailWarning.style.display = "block";
-  } else {
-    emailWarning.style.display = "none";
-  }
+  emailInput.classList.add("invalid");
+  document.getElementById("emailError").style.display = "block";
+  emailWarning.style.display = "block";
+  return; // Stop form submission if email is invalid
+} else {
+  emailWarning.style.display = "none";
+}
+
   // Explicitly append all form fields to ensure consistent delivery
   formData.append("classmate_name", form.querySelector('[name="classmate_name"]').value);
   formData.append("name_1975", form.querySelector('[name="name_1975"]').value);
@@ -316,7 +318,9 @@ function submitForm(event) {
   }
    
 // Ensure value gets parsed properly before submission
-document.getElementById("reunionForm").addEventListener("submit", (e) => {
+  const legacyInput = document.getElementById("legacy_fund");
+
+  document.getElementById("reunionForm").addEventListener("submit", (e) => {
   const val = legacyInput.value.replace(/[^0-9.]/g, "");
   legacyInput.value = parseFloat(val || "0");
 });
