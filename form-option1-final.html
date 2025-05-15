@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- form-option1-final.html -->
-<!-- Version: 3.2.1 | Date: 2025-05-15 | Final live version with all test mode scripts removed -->
+<!-- Version: 3.2.2 | Date: 2025-05-15 | Final live version with all test mode scripts removed -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -234,13 +234,18 @@ function closeLegacyPopup() {
 
 document.addEventListener("DOMContentLoaded", () => {
   updateSummary();
-
-  document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
-  document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
+   document.querySelector('[name="guest_name"]').addEventListener('input', updateSummary);
+   document.querySelector('[name="legacy_fund"]').addEventListener('input', updateSummary);
 });
 
 function submitForm(event) {
   event.preventDefault();
+
+  // Sanitize Legacy Fund value for summary display
+  const legacyRaw = form.querySelector('[name="legacy_fund"]').value.replace(/[^0-9.]/g, "");
+  const legacyDollars = parseFloat(legacyRaw) || 0;
+  document.querySelector('#summary-legacy').innerText = `$${legacyDollars.toFixed(2)}`;
+
   updateSummary();
 
   const form = document.getElementById("reunionForm");
