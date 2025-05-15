@@ -309,29 +309,7 @@ function submitForm(event) {
     console.error("Submission error:", error);
   });
   }
-  
-  // Format legacy input field
-  const legacyInput = document.getElementById("legacy_fund");
-  legacyInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") e.preventDefault();
-});
-  
-// === Format Legacy Fund as simple $XX.XX (bold) on blur ===
-legacyInput.addEventListener("blur", (e) => {
-  const raw = e.target.value.replace(/[^0-9.]/g, ""); // Strip non-numeric
-  const dollars = parseFloat(raw);
-
-  if (!isNaN(dollars)) {
-    e.target.value = `$${dollars.toFixed(2)}`;
-    e.target.style.fontWeight = "bold"; // Apply bold formatting
-  } else {
-    e.target.value = "";
-    e.target.style.fontWeight = "normal"; // Remove bold if invalid
-  }
-
-  updateSummary();
-});
-  
+   
 // Ensure value gets parsed properly before submission
 document.getElementById("reunionForm").addEventListener("submit", (e) => {
   const val = legacyInput.value.replace(/[^0-9.]/g, "");
