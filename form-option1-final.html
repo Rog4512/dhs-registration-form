@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DHS Class of 1975 - 50-Year Reunion Registration (Option 2)</title>
+  <title>DHS Class of 1975 - 50-Year Reunion Registration (Option 1)</title>
   
   <style>
       input,select,textarea {font-size: 16px;}
@@ -313,25 +313,21 @@ function submitForm(event) {
   // Format legacy input field
   const legacyInput = document.getElementById("legacy_fund");
   
-  legacyInput.addEventListener("input", (e) => {
-    let raw = e.target.value.replace(/[^0-9.]/g, ""); // Allow digits and decimal
-    let dollars = parseFloat(raw);
-  
-    if (isNaN(dollars) || dollars === 0) {
-      e.target.value = "";
-      updateSummary(); // Ensure summary resets to $0.00
-      return;
-    }
-  
-    const formatted = new Intl.NumberFormat("en-US", {
+  // === Format Legacy Fund as USD ===
+legacyInput.addEventListener("blur", (e) => {
+  let raw = e.target.value.replace(/[^0-9.]/g, "");
+  let dollars = parseFloat(raw);
+  if (!isNaN(dollars)) {
+    e.target.value = dollars.toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 2,
-    }).format(dollars);
-  
-    e.target.value = formatted;
-    updateSummary(); // Update summary after formatting
-  });
+    });
+  } else {
+    e.target.value = "";
+  }
+  updateSummary();
+});
   
 // Ensure value gets parsed properly before submission
 document.getElementById("reunionForm").addEventListener("submit", (e) => {
