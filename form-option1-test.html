@@ -336,6 +336,138 @@ document.getElementById("reunionForm").addEventListener("submit", (e) => {
   legacyInput.value = parseFloat(val || "0");
 });
 </script>
+<script>
+// === AUTO-FILL TEST MODE ===
+function autoFillForm() {
+  const form = document.getElementById("reunionForm");
+  if (!form) return;
 
+  form.classmate_name.value = "Roger Walker";
+  form.name_1975.value = "Roger Walker";
+  form.guest_name.value = "Christy Walker";
+  form.mailing_address.value = "5679 Stanley Chapel Church Rd., Union City, TN 38261";
+  form.email.value = "RNWalker1957@gmail.com";
+  form.phone.value = "615-861-0347";
+  form.classmate_nametag.value = "Roger";
+  form.guest_nametag.value = "Christy";
+  form.notes.value = "Excited to reconnect with old friends!";
+
+  const yesNo = ["Y", "N"];
+  const events = [
+form["friday_tour_classmate"].value = "N";
+form["friday_tour_guest"].value = "N";
+
+form["tailgate_classmate"].value = "Y";
+form["tailgate_guest"].value = "Y";
+
+form["football_game_classmate"].value = "Y";
+form["football_game_guest"].value = "Y";
+
+form["saturday_tour_classmate"].value = "Y";
+form["saturday_tour_guest"].value = "N";
+
+form["saturday_breakfast_classmate"].value = "Y";
+form["saturday_breakfast_guest"].value = "N";
+
+form["saturday_golf_classmate"].value = "N";
+form["saturday_golf_guest"].value = "N";
+
+form["reunion_dinner_classmate"].value = "Y";
+form["reunion_dinner_guest"].value = "Y";
+
+  ];
+  events.forEach(name => {
+    const el = form[name];
+    if (el) el.value = "Y";
+  });
+
+  form.legacy_fund.value = "50.00";
+  document.getElementById("currentReunionFee").value = "45";
+  form.RegistrationFee.value = "45";
+
+  updateSummary(); // Refresh summary panel
+}
+
+// === Add button if URL contains ?testmode=1
+if (window.location.search.includes("testmode=1")) {
+  const btn = document.createElement("button");
+  btn.textContent = "TEST: Auto-Fill";
+  btn.onclick = autoFillForm;
+  btn.style.position = "fixed";
+  btn.style.bottom = "20px";
+  btn.style.right = "20px";
+  btn.style.padding = "10px 14px";
+  btn.style.background = "#333";
+  btn.style.color = "white";
+  btn.style.border = "none";
+  btn.style.borderRadius = "5px";
+  btn.style.zIndex = 9999;
+  document.body.appendChild(btn);
+}
+</script>
+
+<!-- ========================= -->
+<!-- 🧪 TEST MODE BLOCK START -->
+<!-- Remove this block before going live -->
+<script>
+// === Auto-fill helper ===
+function autoFillForm() {
+  const form = document.getElementById("reunionForm");
+  if (!form) return;
+
+  form.classmate_name.value = "Roger Walker";
+  form.name_1975.value = "Roger Alan Walker";
+  form.guest_name.value = "Ava Byte";
+  form.mailing_address.value = "123 Reunion Ln, Dyersburg, TN 38024";
+  form.email.value = "roger@dhs1975alumni.com";
+  form.phone.value = "731-555-1975";
+  form.classmate_nametag.value = "Rog";
+  form.guest_nametag.value = "Ava";
+  form.notes.value = "Excited to reconnect with old friends!";
+
+  // Event selections
+  form["friday_tour_classmate"].value = "Y";
+  form["friday_tour_guest"].value = "Y";
+  form["tailgate_classmate"].value = "Y";
+  form["tailgate_guest"].value = "Y";
+  form["football_game_classmate"].value = "Y";
+  form["football_game_guest"].value = "Y";
+  form["saturday_tour_classmate"].value = "Y";
+  form["saturday_tour_guest"].value = "N";
+  form["saturday_breakfast_classmate"].value = "Y";
+  form["saturday_breakfast_guest"].value = "N";
+  form["saturday_golf_classmate"].value = "N";
+  form["saturday_golf_guest"].value = "N";
+  form["reunion_dinner_classmate"].value = "Y";
+  form["reunion_dinner_guest"].value = "Y";
+
+  form.legacy_fund.value = "100.00";
+  document.getElementById("currentReunionFee").value = "45";
+  form.RegistrationFee.value = "45";
+
+  updateSummary();
+}
+
+// === Add button ONLY in test mode
+if (window.location.search.includes("testmode=1")) {
+  const btn = document.createElement("button");
+  btn.textContent = "TEST: Auto-Fill";
+  btn.onclick = autoFillForm;
+  btn.style.position = "fixed";
+  btn.style.bottom = "20px";
+  btn.style.right = "20px";
+  btn.style.padding = "10px 14px";
+  btn.style.background = "#333";
+  btn.style.color = "white";
+  btn.style.border = "none";
+  btn.style.borderRadius = "5px";
+  btn.style.zIndex = 9999;
+  document.body.appendChild(btn);
+}
+</script>
+<!-- 🧪 TEST MODE BLOCK END -->
+<!-- ========================= -->
+
+  
 </body>
 </html>
