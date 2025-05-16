@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 3.1.2 | Date: 2025-05-13 | ERP_3.0.0_2025-05-06 -->
+<!-- Version: 4.0.0 | Date: 2025-05-13 | ERP_3.0.0_2025-05-06 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -118,15 +118,56 @@
       <input type="hidden" name="RegistrationFee" value="">
       <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
 
-      <label>Classmate Name:</label><input type="text" name="classmate_name" required />
-      <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
-      <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
-      <label>Mailing Address:</label><input type="text" name="mailing_address" />
-      <label>Email Address:<br><span style="font-weight: normal; font-size: 0.9em;">Please enter a valid email address that you check often. This is how we will send you important reunion updates and confirmations. Don’t forget to check your spam folder if you don’t see anything from us!</span></label>
-      <input type="text" name="email" id="email" placeholder="example@gmail.com" />
-      <div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
+      <!-- Classmate Info Block -->
+<label>Classmate Name:</label><input type="text" name="classmate_name" required />
+<label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
+<label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
+<label>Mailing Address:</label><input type="text" name="mailing_address" />
 
-      <label>Phone:</label><input type="text" name="phone" />
+<!-- Mobile & SMS Opt-in -->
+<label>Mobile Phone:</label><input type="text" name="Mobile Phone" />
+<label>Receive text updates (SMS)?</label>
+<select name="SMS Opt-in" id="sms_opt_in">
+  <option value="">-- Select --</option>
+  <option value="Y">Yes</option>
+  <option value="N">No</option>
+</select>
+<div style="font-size: 0.85em; color: #333; margin-top: 5px;">
+  By opting in, you agree to receive time-sensitive reunion reminders and updates via SMS. Standard message and data rates may apply.
+</div>
+
+<!-- Other Phone (label changes based on SMS opt-in) -->
+<label id="otherPhoneLabel">Other Phone:</label>
+<input type="text" name="Other Phone" />
+
+<!-- Email with fallback warning -->
+<label>Email Address:<br>
+  <span style="font-weight: normal; font-size: 0.9em;">
+    Please enter a valid email address that you check often. If SMS is not selected, email will be our primary method of contact.
+  </span>
+</label>
+<input type="text" name="email" id="email" placeholder="example@gmail.com" />
+<div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
+
+<!-- JavaScript: Adjust "Other Phone" label if SMS = Y -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const smsOptIn = document.getElementById("sms_opt_in");
+    const otherPhoneLabel = document.getElementById("otherPhoneLabel");
+
+    function updateOtherPhoneLabel() {
+      if (smsOptIn.value === "Y") {
+        otherPhoneLabel.innerText = "Other Phone (Optional):";
+      } else {
+        otherPhoneLabel.innerText = "Other Phone:";
+      }
+    }
+
+    updateOtherPhoneLabel();
+    smsOptIn.addEventListener("change", updateOtherPhoneLabel);
+  });
+</script>
+      
       <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
       <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
       <label>Notes:</label><textarea name="notes" rows="3"></textarea>
