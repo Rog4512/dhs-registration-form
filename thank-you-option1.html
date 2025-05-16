@@ -160,6 +160,7 @@
       const guestName = getParam('guest_name');
       const legacyFund = getParam('legacy_fund') || "0.00";
       const totalDue = getParam('TotalDue') || "0.00";
+      const registrationFee = parseFloat(totalDue) - parseFloat(legacyFund);
       const email = getParam('email');
 
       document.getElementById('personalMessage').innerText = `Thank you, ${classmateName}, for completing your reunion registration!`;
@@ -179,7 +180,7 @@
         if (guestChoice) eventDetails += formatEvent(`${label} (Guest)`, guestChoice);
       });
       document.getElementById('eventSummary').innerHTML = eventDetails;
-
+      document.getElementById('registrationFee').innerText = registrationFee.toFixed(2);
       document.getElementById('legacyFund').innerText = parseFloat(legacyFund).toFixed(2);
       document.getElementById('totalDue').innerText = parseFloat(totalDue).toFixed(2);
 
