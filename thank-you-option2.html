@@ -73,6 +73,7 @@
       <p><strong>Classmate Name:</strong> <span id="classmateName"></span></p>
       <p id="guestInfo"></p>
       <div id="eventSummary"></div>
+      <p><strong>Registration Fee:</strong> $<span id="registrationFee"></span></p>
       <p><strong>Legacy Fund Contribution:</strong> $<span id="legacyFund"></span></p>
       <p><strong>Total Amount Due:</strong> $<span id="totalDue"></span></p>
     </div>
@@ -155,6 +156,7 @@
       const guestName = getParam('guest_name');
       const legacyFund = getParam('legacy_fund') || "0.00";
       const totalDue = getParam('TotalDue') || "0.00";
+      const registrationFee = parseFloat(totalDue) - parseFloat(legacyFund);    
       const email = getParam('email');
 
       document.getElementById('personalMessage').innerText = `Thank you, ${classmateName}, for completing your reunion registration!`;
@@ -170,11 +172,15 @@
       eventNames.forEach(([label, classmateField, guestField]) => {
         const classmateChoice = getParam(classmateField);
         const guestChoice = getParam(guestField);
+        const registrationFee = parseFloat(totalDue) - parseFloat(legacyFund);
+        const legacyFund = getParam('legacy_fund') || "0.00";
+        const totalDue = getParam('TotalDue') || "0.00";
+             
         if (classmateChoice) eventDetails += formatEvent(`${label} (Classmate)`, classmateChoice);
         if (guestChoice) eventDetails += formatEvent(`${label} (Guest)`, guestChoice);
       });
       document.getElementById('eventSummary').innerHTML = eventDetails;
-
+      document.getElementById('registrationFee').innerText = registrationFee.toFixed(2);
       document.getElementById('legacyFund').innerText = parseFloat(legacyFund).toFixed(2);
       document.getElementById('totalDue').innerText = parseFloat(totalDue).toFixed(2);
 
