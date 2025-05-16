@@ -72,6 +72,7 @@
       <p><strong>Classmate Name:</strong> <span id="classmateName"></span></p>
       <p id="guestInfo"></p>
       <div id="eventSummary"></div>
+      <p><strong>Registration Fee:</strong> $<span id="registrationFee"></span></p>
       <p><strong>Legacy Fund Contribution:</strong> $<span id="legacyFund"></span></p>
       <p><strong>Total Amount Due:</strong> $<span id="totalDue"></span></p>
     </div>
@@ -184,6 +185,22 @@
       document.getElementById('legacyFund').innerText = parseFloat(legacyFund).toFixed(2);
       document.getElementById('totalDue').innerText = parseFloat(totalDue).toFixed(2);
 
+      const paymentStatus = getParam('status');
+      let paymentReceived = 0;
+      let balanceDue = parseFloat(totalDue);
+      
+      if (paymentStatus !== 'cancel') {
+        paymentReceived = parseFloat(totalDue);
+        balanceDue = 0;
+      } else {
+        document.getElementById('paymentNotice').innerText =
+          "There was an issue processing your payment. Your registration has been saved. You will receive an email with payment options shortly.";
+        document.getElementById('paymentNotice').style.display = 'block';
+      }
+      
+      document.getElementById('paymentReceived').innerText = paymentReceived.toFixed(2);
+      document.getElementById('balanceDue').innerText = balanceDue.toFixed(2);
+    
       if (email.trim() !== '') {
         document.getElementById('emailMessage').innerText = "You will receive a confirmation email with your registration summary and mailing instructions shortly.";
       } else {
