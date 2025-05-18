@@ -1,12 +1,13 @@
+Backup form-option2=final.html 2.5.9 2025/05/07
+
 <!DOCTYPE html>
-<!-- Version: 4.0.0 | Date: 2025-05-13 | ERP_3.0.0_2025-05-06 -->
+<!-- Version: 2.5.9 | Date: 2025-05-06 | ERP_3.0.0_2025-05-06 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DHS Class of 1975 - 50-Year Reunion Registration (Option 2)</title>
   <style>
-      input,select,textarea {font-size: 16px;}
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -118,59 +119,15 @@
       <input type="hidden" name="RegistrationFee" value="">
       <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
 
-      <!-- Classmate Info Block -->
-<label>Classmate Name:</label><input type="text" name="classmate_name" required />
-<label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
-<label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
-<label>Mailing Address:</label><input type="text" name="mailing_address" />
+      <label>Classmate Name:</label><input type="text" name="classmate_name" required />
+      <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
+      <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
+      <label>Mailing Address:</label><input type="text" name="mailing_address" />
+      <label>Email Address:<br><span style="font-weight: normal; font-size: 0.9em;">Please enter a valid email address that you check often. This is how we will send you important reunion updates and confirmations. Don’t forget to check your spam folder if you don’t see anything from us!</span></label>
+      <input type="text" name="email" id="email" placeholder="example@gmail.com" />
+      <div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
 
-<!-- Mobile & SMS Opt-in -->
-<label>Mobile Phone:</label>
-<input type="text" name="Mobile Phone" />
-
-<!-- SMS Opt-in with Checkbox -->
-<div style="margin-top: 12px;">
-  <label style="display: flex; align-items: flex-start; font-weight: bold;">
-    <input type="checkbox" name="sms_opt_in" value="Y" style="margin-right: 10px; margin-top: 3px;">
-    Yes, I’d like to receive important text updates about the reunion (preferred over email).
-  </label>
-  <div style="font-size: 0.85em; color: #333; margin-left: 25px; margin-top: 4px;">
-    By opting in, you agree to receive time-sensitive reunion reminders and updates via SMS. Standard message and data rates may apply.
-  </div>
-</div>
-
-<!-- Other Phone (label changes based on SMS opt-in) -->
-<label id="otherPhoneLabel">Other Phone:</label>
-<input type="text" name="Other Phone" />
-
-<!-- Email with fallback warning -->
-<label>Email Address:<br>
-  <span style="font-weight: normal; font-size: 0.9em;">
-    Please enter a valid email address that you check often. If SMS is not selected, email will be our primary method of contact.
-  </span>
-</label>
-<input type="text" name="email" id="email" placeholder="example@gmail.com" />
-<div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
-
-<!-- JavaScript: Adjust "Other Phone" label if SMS = Y -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const smsOptIn = document.getElementById("sms_opt_in");
-    const otherPhoneLabel = document.getElementById("otherPhoneLabel");
-
-    function updateOtherPhoneLabel() {
-      if (smsOptIn.value === "Y") {
-        otherPhoneLabel.innerText = "Other Phone (Optional):";
-      } else {
-        otherPhoneLabel.innerText = "Other Phone:";
-      }
-    }
-
-    updateOtherPhoneLabel();
-    smsOptIn.addEventListener("change", updateOtherPhoneLabel);
-  });
-</script>
-      
+      <label>Phone:</label><input type="text" name="phone" />
       <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
       <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
       <label>Notes:</label><textarea name="notes" rows="3"></textarea>
@@ -193,16 +150,11 @@
     <tr><td>Saturday Breakfast</td>
       <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    //Golf notes
     <tr><td>Saturday Golf</td>
       <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
       <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr>
-      <td colspan="3" style="color: red; font-style: italic; padding-top: 4px;">
-      * The course does not offer club rentals and does not allow sharing. The clubhouse suggests www.shipsticks.com if you need to ship your clubs.
-      </td>
-    </tr>   
-       <div style="margin-left: 25px; color: #b30000; font-size: 0.9em; font-style: italic;">
+    <div style="margin-left: 25px; color: #b30000; font-size: 0.9em; font-style: italic;">
+  * Please make arrangements for golf clubs in advance. Club rentals are not available at the course, but you may be able to borrow or share with a local player.
 </div>
     <tr><td>Reunion Dinner</td>
       <td><select name="reunion_dinner_classmate"><option></option><option>Y</option><option>N</option></select></td>
@@ -349,7 +301,7 @@ function submitForm(event) {
     formData.forEach((value, key) => {
       params.append(key, value);
     });
-    window.location.href = "thank-you-option2.html?" + params.toString();
+    window.location.href = "thank-you.html?" + params.toString();
   })
   .catch((error) => {
     alert("Something went wrong. Please try again later.");
@@ -360,7 +312,6 @@ function submitForm(event) {
 
 </body>
 </html>
-
 
 
 
