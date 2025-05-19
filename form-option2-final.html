@@ -297,25 +297,22 @@ function submitForm(event) {
   for (let pair of formData.entries()) {
   console.log(`📦 ${pair[0]}: ${pair[1]}`);
 }
-  fetch("fetch("https://script.google.com/macros/s/AKfycbzPYo_eTrf5Ve9-fwY8X2yu0jRFoiaMi7nl134DXfWv9Q64l8wJ6g5rFBOw6cPuW47cow/exec", {
-", {
-
-    method: "POST",
-    body: formData,
-    mode: "cors"
-  })
-  .then(() => {
-    let params = new URLSearchParams();
-    console.log("✅ Fetch returned successfully. Appending form data...");
-    formData.forEach((value, key) => {
-      params.append(key, value);
-    });
-    window.location.href = "thank-you-option2.html?" + params.toString();
-   })
-  .catch((error) => {
-    alert("Something went wrong. Please try again later.");
-    console.error("Submission error:", error);
+  fetch("https://script.google.com/macros/s/AKfycbzPYo_eTrf5Ve9-fwY8X2yu0jRFoiaMi7nl134DXfWv9Q64l8wJ6g5rFBOw6cPuW47cow/exec", {
+  method: "POST",
+  body: formData,
+  mode: "cors"
+})
+.then(() => {
+  let params = new URLSearchParams();
+  formData.forEach((value, key) => {
+    params.append(key, value);
   });
+  window.location.href = "thank-you-option2.html?" + params.toString();
+})
+.catch((error) => {
+  alert("Something went wrong. Please try again later.");
+  console.error("Submission error:", error);
+});
 }
 </script>
 
