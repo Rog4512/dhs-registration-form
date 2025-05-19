@@ -294,6 +294,9 @@ function submitForm(event) {
   alert("Submitting registration now... hang tight!");
   console.log("🚀 Attempting to submit to Apps Script endpoint...");
 
+  for (let pair of formData.entries()) {
+  console.log(`📦 ${pair[0]}: ${pair[1]}`);
+}
   fetch("fetch("https://script.google.com/macros/s/AKfycbzPYo_eTrf5Ve9-fwY8X2yu0jRFoiaMi7nl134DXfWv9Q64l8wJ6g5rFBOw6cPuW47cow/exec", {
 ", {
 
