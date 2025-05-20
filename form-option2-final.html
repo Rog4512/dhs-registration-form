@@ -132,6 +132,33 @@
 
       <table class="events-table">
   <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
+
+  <body>
+  <div class="form-container">
+    <input type="hidden" id="currentReunionFee" value="45">
+    <h1>DHS Class of 1975</h1>
+    <h2>50-Year Reunion Registration</h2>
+    <h3>Registration Option #2: Register Online, Pay by Check</h3>
+
+    <form id="reunionForm" onsubmit="submitForm(event)">
+      <input type="hidden" name="RegistrationFee" value="">
+      <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
+
+      <label>Classmate Name:</label><input type="text" name="classmate_name" required />
+      <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
+      <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
+      <label>Mailing Address:</label><input type="text" name="mailing_address" />
+      <label>Email Address:<br><span style="font-weight: normal; font-size: 0.9em;">Please enter a valid email address that you check often. This is how we will send you important reunion updates and confirmations. Don’t forget to check your spam folder if you don’t see anything from us!</span></label>
+      <input type="text" name="email" id="email" placeholder="example@gmail.com" />
+      <div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
+
+      <label>Phone:</label><input type="text" name="phone" />
+      <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
+      <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
+      <label>Notes:</label><textarea name="notes" rows="3"></textarea>
+
+      <table class="events-table">
+  <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
  <table class="events-table">
   <thead>
     <tr>
