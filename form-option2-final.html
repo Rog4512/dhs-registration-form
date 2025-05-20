@@ -132,36 +132,70 @@
 
       <table class="events-table">
   <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
+ <table class="events-table">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Classmate</th>
+      <th>Guest</th>
+    </tr>
+  </thead>
   <tbody>
-    <tr><td>Friday Tour</td>
+    <tr>
+      <td>Friday Tour</td>
       <td><select name="friday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="friday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr><td>Tailgate Party</td>
+      <td><select name="friday_tour_guest"><option></option><option>Y</option><option>N</option></select></td>
+    </tr>
+    <tr>
+      <td>Tailgate Party</td>
       <td><select name="tailgate_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="tailgate_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr><td>Football Game</td>
+      <td><select name="tailgate_guest"><option></option><option>Y</option><option>N</option></select></td>
+    </tr>
+    <tr>
+      <td>Football Game</td>
       <td><select name="football_game_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="football_game_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr><td>Saturday Tour</td>
+      <td><select name="football_game_guest"><option></option><option>Y</option><option>N</option></select></td>
+    </tr>
+    <tr>
+      <td>Saturday Tour</td>
       <td><select name="saturday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr><td>Saturday Breakfast</td>
+      <td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td>
+    </tr>
+    <tr>
+      <td>Saturday Breakfast</td>
       <td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <tr><td>Saturday Golf</td>
+      <td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td>
+    </tr>
+    <tr>
+      <td>Saturday Golf</td>
       <td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-    <p style="font-size: 0.9em; margin-top: 5px; color: #333;">
-  <strong>Note:</strong> Please bring your own golf clubs. Rentals are not available, and the course requires each player to have their own set—sharing is not permitted.
-    <tr><td>Reunion Dinner</td>
+      <td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td>
+    </tr>
+    <!-- Golf Note Row -->
+    <tr>
+      <td colspan="3">
+        <p style="font-size: 0.9em; margin: 5px 0; color: #333;">
+          <strong>Note:</strong> Please bring your own golf clubs. Rentals are not available, and the course requires each player to have their own set—sharing is not permitted.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>Reunion Dinner</td>
       <td><select name="reunion_dinner_classmate"><option></option><option>Y</option><option>N</option></select></td>
-      <td><select name="reunion_dinner_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-      <p style="font-size: 0.9em; margin-top: 5px; color: #333;">
-  <em>Note:</em> A cash bar will be available at the Reunion Dinner. Please plan for cash payment, as there are no ATMs in the building.
+      <td><select name="reunion_dinner_guest"><option></option><option>Y</option><option>N</option></select></td>
+    </tr>
+    <!-- Cash Bar Note Row -->
+    <tr>
+      <td colspan="3">
+        <p style="font-size: 0.9em; margin: 5px 0; color: #333;">
+          <em>Note:</em> A cash bar will be available at the Reunion Dinner. Please plan for cash payment, as there are no ATMs in the building.
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 
-      <label>
+<label>
         Legacy Fund Contribution (optional):
         <a href="#" onclick="showLegacyPopup()" style="font-size: 0.85em; font-weight: normal; margin-left: 8px;">What’s this?</a>
       </label>
