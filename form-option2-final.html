@@ -107,46 +107,10 @@
   </style>
 </head>
 <body>
-<body>
-  <div class="form-container">
-    <input type="hidden" id="currentReunionFee" value="45">
-    <h1>DHS Class of 1975</h1>
-    <h2>50-Year Reunion Registration</h2>
-    <h3>Registration Option #2: Register Online, Pay by Check</h3>
-
-    <form id="reunionForm" onsubmit="submitForm(event)">
-      <input type="hidden" name="RegistrationFee" value="">
-      <input type="hidden" name="TotalDue" id="hiddenTotalDue" value="">
-
-      <label>Classmate Name:</label><input type="text" name="classmate_name" required />
-      <label>1975 First and Last Name (if different):</label><input type="text" name="name_1975" />
-      <label>Spouse/Guest Name (if attending):</label><input type="text" name="guest_name" />
-      <label>Mailing Address:</label><input type="text" name="mailing_address" />
-      <label>Email Address:<br><span style="font-weight: normal; font-size: 0.9em;">Please enter a valid email address that you check often.</span></label>
-      <input type="text" name="email" id="email" placeholder="example@gmail.com" />
-      <div id="emailError">Please recheck your email — something doesn’t look quite right.</div>
-
-      <label>Phone:</label><input type="text" name="phone" />
-      <label>Preferred classmate name for Nametag:</label><input type="text" name="classmate_nametag" />
-      <label>Preferred spouse/guest name for Nametag:</label><input type="text" name="guest_nametag" />
-      <label>Notes:</label><textarea name="notes" rows="3"></textarea>
-
-      <table class="events-table">
-        <thead><tr><th>Event</th><th>Classmate</th><th>Guest</th></tr></thead>
-        <tbody>
-          <tr><td>Friday Tour</td><td><select name="friday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="friday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Tailgate Party</td><td><select name="tailgate_classmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="tailgate_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Football Game</td><td><select name="football_game_classmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="football_game_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Tour</td><td><select name="saturday_tour_classmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="saturday_tour_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Breakfast</td><td><select name="saturday_breakfast_classmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="saturday_breakfast_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td>Saturday Golf</td><td><select name="saturday_golf_classmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="saturday_golf_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td colspan="3"><p style="font-size: 0.9em; color: #333;"><strong>Note:</strong> Please bring your own golf clubs. Rentals are not available, and sharing is not permitted.</p></td></tr>
-          <tr><td>Reunion Dinner</td><td><select name="reunion_dinner_classmate"><option></option><option>Y</option><option>N</option></select></td><td><select name="reunion_dinner_guest"><option></option><option>Y</option><option>N</option></select></td></tr>
-          <tr><td colspan="3"><p style="font-size: 0.9em; color: #333;"><em>Note:</em> A cash bar will be available at the Reunion Dinner. Please plan for cash payment, as there are no ATMs in the building.</p></td></tr>
-        </tbody>
-      </table>
-
-      <label>Legacy Fund Contribution (optional): <a href="#" onclick="showLegacyPopup()" style="font-size: 0.85em;">What’s this?</a></label>
+      <label>
+        Legacy Fund Contribution (optional):
+        <a href="#" onclick="showLegacyPopup()" style="font-size: 0.85em; font-weight: normal; margin-left: 8px;">What’s this?</a>
+      </label>
       <input type="number" name="legacy_fund" min="0" placeholder="$0.00" />
 
       <div class="summary-box">
@@ -158,7 +122,7 @@
       </div>
 
       <div class="mail-section">
-        <p><strong>Please note the classmate's name in the check memo line.</strong></p>
+        <p><strong>Please note the classmate's name in the check memo line (if it's not obvious from the check).</strong></p>
         <p><strong>Mail your check to:</strong><br>Nancy Broadstone<br>Dyer County Trustee<br>P.O. Box 1360<br>Dyersburg, TN 38025-1360</p>
       </div>
 
@@ -167,9 +131,9 @@
 
     <p id="standby-message">Please stand by while we process your registration...</p>
 
-    <div id="legacyPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; width:80%; max-width:400px;">
+    <div id="legacyPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; width:80%; max-width:400px; box-shadow: 0 0 10px rgba(0,0,0,0.2); border-radius: 8px;">
       <h3>Legacy Fund</h3>
-      <p>These funds allow us to quietly assist classmates who wish to attend but may not be able to afford it. They also help us honor classmates who are ill or have passed.</p>
+      <p>These funds allow us to quietly assist classmates who wish to attend reunion events but may not be able to afford it. They also help us extend small acts of kindness to classmates who are seriously ill or to honor those who have passed. Your generosity ensures that no classmate is forgotten.</p>
       <button onclick="closeLegacyPopup()" style="margin-top: 10px;">Close</button>
     </div>
     <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:999;"></div>
@@ -177,7 +141,9 @@
     <div id="thankYouMessage" class="thank-you">
       <h2>Thank You for Registering!</h2>
       <p>Your form was submitted successfully.</p>
-      <div id="emailWarning"><p><strong>Heads Up:</strong> If you don’t receive your confirmation within 10 minutes, please email <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a>.</p></div>
+      <div id="emailWarning">
+        <p><strong>Heads Up:</strong> It looks like your email may have been entered incorrectly. If you don’t receive your confirmation within 10 minutes, please email <a href="mailto:roger@dhs1975alumni.com">roger@dhs1975alumni.com</a>.</p>
+      </div>
     </div>
   </div>
 
@@ -242,16 +208,17 @@ function submitForm(event) {
     emailWarning.style.display = "none";
   }
 
-  formData.append("email", emailVal);
   fetch("https://script.google.com/macros/s/AKfycbzPYo_eTrf5Ve9-fwY8X2yu0jRFoiaMi7nl134DXfWv9Q64l8wJ6g5rFBOw6cPuW47cow/exec", {
     method: "POST",
     body: formData,
     mode: "cors"
-  }).then(() => {
+  })
+  .then(() => {
     let params = new URLSearchParams();
     formData.forEach((value, key) => params.append(key, value));
     window.location.href = "thank-you-option2.html?" + params.toString();
-  }).catch((error) => {
+  })
+  .catch((error) => {
     alert("Something went wrong. Please try again later.");
     console.error("Submission error:", error);
   });
